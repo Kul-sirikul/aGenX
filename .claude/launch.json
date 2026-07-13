@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "storybook",
-      "runtimeExecutable": "npx",
-      "runtimeArgs": ["storybook", "dev", "-p", "6007", "--no-open"],
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "storybook"],
       "port": 6007
     }
   ]

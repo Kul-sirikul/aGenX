@@ -8,7 +8,7 @@
     "app:build": "tsc && vite build",
     "app:lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "app:preview": "vite preview",
-    "storybook": "storybook dev -p 6006 --no-open",
+    "storybook": "storybook dev -p 6007 --no-open",
     "storybook:build": "storybook build --output-dir dist/storybook",
     "build": "npm run app:build; npm run storybook:build",
     "script:dev-resources": "cd scripts/dev-resources; node --env-file=../../.env app.mjs; cd -;",
