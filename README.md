@@ -7,6 +7,7 @@ Design system for aGentX, built with React, Vite, Storybook, and Figma Code Conn
 - `npm i` to install dependencies
 - `npm run app:dev` runs the app at [localhost:5173](http://localhost:5173)
 - `npm run storybook` starts Storybook at [localhost:6006](http://localhost:6006)
+- Live Storybook (deployed on push to `main`): [kul-sirikul.github.io/aGentX/storybook](https://kul-sirikul.github.io/aGentX/storybook/)
 
 ### Figma Auth
 
