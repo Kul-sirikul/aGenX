@@ -18,6 +18,23 @@ const dropdownVariantLabels: Record<string, string> = {
   "Secondary dropdown": "Secondary with arrow button",
 };
 
+const playgroundVariants: ButtonVariant[] = [
+  "Primary",
+  "Secondary",
+  "Red",
+  "Ghost",
+  "Primary dropdown",
+  "Secondary dropdown",
+];
+const playgroundVariantLabels: Record<string, string> = {
+  Primary: "Primary button",
+  Secondary: "Secondary button",
+  Red: "Red button",
+  Ghost: "Ghost button",
+  "Primary dropdown": "Primary with arrow button",
+  "Secondary dropdown": "Secondary with arrow button",
+};
+
 const meta = {
   title: "Primitives/Button",
   component: Button,
@@ -46,6 +63,21 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+
+export const Playground: Story = {
+  args: {
+    variant: "Primary",
+  },
+  argTypes: {
+    variant: {
+      control: {
+        type: "select",
+        labels: playgroundVariantLabels,
+      },
+      options: playgroundVariants,
+    },
+  },
+};
 
 export const Primary: Story = {
   args: {
