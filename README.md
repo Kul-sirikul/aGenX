@@ -1,20 +1,20 @@
-# aGentX
+# aGenX
 
-Design system for aGentX, built with React, Vite, Storybook, and Figma Code Connect.
+Design system for aGenX, built with React, Vite, Storybook, and Figma Code Connect.
 
 ## Setup
 
 - `npm i` to install dependencies
 - `npm run app:dev` runs the app at [localhost:5173](http://localhost:5173)
 - `npm run storybook` starts Storybook at [localhost:6007](http://localhost:6007)
-- Live Storybook (deployed on push to `main`): [kul-sirikul.github.io/aGentX/storybook](https://kul-sirikul.github.io/aGentX/storybook/)
+- Live Storybook (deployed on push to `main`): [kul-sirikul.github.io/aGenX/storybook](https://kul-sirikul.github.io/aGenX/storybook/)
 
 ### Figma Auth
 
 - Create a Figma API token at figma.com/developers/api with `Code Connect`, `File Read`, `Variables`, and `Dev Resources Write` scopes
 - Duplicate [.env-rename](./.env-rename), rename it to `.env` (git-ignored)
   - Set `FIGMA_ACCESS_TOKEN=` with your token
-  - Set `FIGMA_FILE_KEY=` with the aGentX Figma file key
+  - Set `FIGMA_FILE_KEY=` with the aGenX Figma file key
 
 ### Code Connect
 

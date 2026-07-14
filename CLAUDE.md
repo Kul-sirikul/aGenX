@@ -1,13 +1,13 @@
-# aGentX Design System
+# aGenX Design System
 
 React + Vite + TypeScript + Storybook 8, backed by Figma Variables and Figma Code Connect, integrated with Figma's Dev Mode MCP server so AI tools can read the design system directly from Figma.
 
 ## Status
 
-- Scaffold pushed to `https://github.com/Kul-sirikul/aGentX` (public repo, `main` branch).
+- Scaffold pushed to `https://github.com/Kul-sirikul/aGenX` (public repo, `main` branch).
 - Config was bootstrapped from Figma's own "Simple Design System" reference repo — only reusable tooling was kept (Storybook config, CI workflow, token/icon pull scripts). No demo components, no Figma-owned LICENSE, no SDS branding.
 - No components exist yet. `src/ui/*` and `src/figma/*` subfolders are empty, ready to be filled in one at a time.
-- **Pending immediate task**: the old reference folder `sds-main` (sibling of this folder) should be deleted once this session is confirmed to be running from inside `aGentX` — do this early in the first session here.
+- **Pending immediate task**: the old reference folder `sds-main` (sibling of this folder) should be deleted once this session is confirmed to be running from inside `aGenX` — do this early in the first session here.
 
 ## Structure
 

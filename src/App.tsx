@@ -1,5 +1,5 @@
 function App() {
-  return <div>aGentX design system</div>;
+  return <div>aGenX design system</div>;
 }
 
 export default App;
