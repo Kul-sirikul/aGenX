@@ -1,0 +1,14 @@
+.agx-tab-container {
+  display: flex;
+  align-items: center;
+}
+
+.agx-tab-container--container {
+  background: var(--surface-gray-extra-light);
+  padding: var(--spacing-4);
+  border-radius: var(--radius-8-medium);
+}
+
+.agx-tab-container--ghost {
+  gap: var(--spacing-12);
+}
