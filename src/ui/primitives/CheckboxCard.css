@@ -1,0 +1,84 @@
+.agx-checkbox-card {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  width: 100%;
+  border: var(--border-100-base) solid var(--border-gray-super-light);
+  border-radius: var(--radius-8-medium);
+  background: var(--surface-white);
+  font-family: var(--font-family-noto-sans-thai), sans-serif;
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.agx-checkbox-card--m {
+  padding: var(--spacing-12);
+}
+
+.agx-checkbox-card--s {
+  padding: var(--spacing-8) var(--spacing-12);
+}
+
+.agx-checkbox-card__content {
+  display: flex;
+  flex: 1 0 0;
+  min-width: 0;
+  align-items: center;
+  gap: var(--spacing-12);
+}
+
+/* A description turns the text into two lines — align the box to the top. */
+.agx-checkbox-card__content:has(.agx-checkbox-card__description) {
+  align-items: flex-start;
+}
+
+.agx-checkbox-card__text-col {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 0;
+  min-width: 0;
+  gap: var(--spacing-4);
+}
+
+.agx-checkbox-card__text {
+  font-size: var(--size-14);
+  line-height: var(--line-height-20);
+  color: var(--text-primary);
+}
+
+.agx-checkbox-card__description {
+  font-size: var(--size-12);
+  line-height: var(--line-height-16);
+  color: var(--text-tertiary);
+}
+
+.agx-checkbox-card__badge {
+  flex-shrink: 0;
+  padding: var(--spacing-0) var(--spacing-4);
+  border-radius: var(--radius-4-xsmall);
+  background: var(--surface-gray-extra-light);
+  font-size: var(--size-10);
+  line-height: var(--line-height-16);
+  color: var(--text-secondary);
+}
+
+.agx-checkbox-card[data-hovered] {
+  background: var(--surface-gray-super-light);
+}
+
+.agx-checkbox-card[data-selected],
+.agx-checkbox-card[data-indeterminate] {
+  background: var(--surface-purple-extra-light);
+  border-color: var(--border-brand-light);
+}
+
+.agx-checkbox-card[data-focus-visible] {
+  box-shadow: var(--shadow-focus-shadow);
+}
+
+.agx-checkbox-card[data-disabled] {
+  cursor: not-allowed;
+  opacity: var(--opacity-button-disable);
+}

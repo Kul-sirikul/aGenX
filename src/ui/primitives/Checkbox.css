@@ -1,0 +1,70 @@
+/* Indicator square — shared by Checkbox, CheckboxWithLabel and CheckboxCard */
+
+.agx-checkbox-box {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  border: var(--border-100-base) solid var(--border-gray-super-light);
+  border-radius: var(--radius-4-xsmall);
+  background: var(--surface-white);
+  color: var(--icon-white);
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.agx-checkbox-box__icon {
+  width: 12px;
+  height: 12px;
+}
+
+.agx-checkbox-box[data-selected],
+.agx-checkbox-box[data-indeterminate] {
+  background: var(--surface-purple);
+  border-color: transparent;
+}
+
+.agx-checkbox-box[data-disabled] {
+  background: var(--surface-gray-extra-light);
+  border-color: var(--border-gray-super-light);
+}
+
+.agx-checkbox-box[data-selected][data-disabled],
+.agx-checkbox-box[data-indeterminate][data-disabled] {
+  background: var(--surface-gray);
+  border-color: transparent;
+}
+
+/* Checkbox — indicator with an optional inline label */
+
+.agx-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  font-family: var(--font-family-noto-sans-thai), sans-serif;
+  font-weight: var(--weight-medium);
+  font-size: var(--size-14);
+  line-height: var(--line-height-20);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.agx-checkbox[data-disabled] {
+  cursor: not-allowed;
+}
+
+/* Hover / focus only affect the unchecked box outline */
+
+.agx-checkbox[data-hovered] .agx-checkbox-box:not([data-selected]):not([data-indeterminate]):not([data-disabled]) {
+  border-color: var(--border-brand-light);
+}
+
+.agx-checkbox[data-focus-visible] .agx-checkbox-box {
+  box-shadow: var(--shadow-focus-shadow);
+}
+
+.agx-checkbox[data-focus-visible] .agx-checkbox-box:not([data-selected]):not([data-indeterminate]) {
+  border-color: var(--border-brand-light);
+}

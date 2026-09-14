@@ -1,0 +1,82 @@
+.agx-checkbox-with-label {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+  font-family: var(--font-family-noto-sans-thai), sans-serif;
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+}
+
+.agx-checkbox-with-label[data-disabled] {
+  cursor: not-allowed;
+}
+
+.agx-checkbox-with-label__row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  width: 100%;
+}
+
+.agx-checkbox-with-label--back .agx-checkbox-with-label__row {
+  flex-direction: row-reverse;
+}
+
+.agx-checkbox-with-label__text {
+  font-size: var(--size-14);
+  line-height: var(--line-height-20);
+  color: var(--text-primary);
+}
+
+.agx-checkbox-with-label--back .agx-checkbox-with-label__text {
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+.agx-checkbox-with-label__desc1 {
+  flex: 1 0 0;
+  min-width: 0;
+  font-size: var(--size-12);
+  line-height: var(--line-height-16);
+  color: var(--text-tertiary);
+}
+
+.agx-checkbox-with-label__icon {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  padding: var(--spacing-2);
+  border-radius: var(--radius-6-small);
+  color: var(--icon-gray);
+}
+
+.agx-checkbox-with-label__icon-svg {
+  width: 16px;
+  height: 16px;
+}
+
+.agx-checkbox-with-label__desc2 {
+  padding-left: var(--spacing-28);
+  font-size: var(--size-12);
+  line-height: var(--line-height-16);
+  color: var(--text-tertiary);
+}
+
+/* Hover / focus mirror the bare Checkbox — outline only on the unchecked box */
+
+.agx-checkbox-with-label[data-hovered] .agx-checkbox-box:not([data-selected]):not([data-indeterminate]):not([data-disabled]) {
+  border-color: var(--border-brand-light);
+}
+
+.agx-checkbox-with-label[data-focus-visible] .agx-checkbox-box {
+  box-shadow: var(--shadow-focus-shadow);
+}
+
+.agx-checkbox-with-label[data-focus-visible] .agx-checkbox-box:not([data-selected]):not([data-indeterminate]) {
+  border-color: var(--border-brand-light);
+}
