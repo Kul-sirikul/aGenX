@@ -4,5 +4,8 @@ export * from "./Chip";
 export * from "./Dropdown";
 export * from "./DropdownItem";
 export * from "./DropdownList";
+export * from "./Input";
+export * from "./InputLabel";
+export * from "./InputWithBadge";
 export * from "./TabItem";
 export * from "./TabContainer";

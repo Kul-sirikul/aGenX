@@ -1,0 +1,63 @@
+.agx-input-label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+  width: 317px;
+  font-family: var(--font-family-noto-sans-thai), sans-serif;
+}
+
+.agx-input-label--s {
+  width: 180px;
+}
+
+.agx-input-label__row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  width: 100%;
+}
+
+.agx-input-label__text {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-4);
+  flex: 1 0 0;
+  min-width: 0;
+  white-space: nowrap;
+  color: var(--text-primary);
+  font-weight: var(--weight-medium);
+  font-size: var(--size-14);
+  line-height: var(--line-height-20);
+}
+
+.agx-input-label--s .agx-input-label__text {
+  font-size: var(--size-12);
+  line-height: var(--line-height-16);
+}
+
+.agx-input-label__optional {
+  color: var(--text-tertiary);
+  font-size: var(--size-12);
+  line-height: var(--line-height-16);
+}
+
+.agx-input-label__info-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  padding: var(--spacing-2);
+  border: none;
+  border-radius: var(--radius-6-small);
+  background: transparent;
+  color: var(--icon-gray);
+  cursor: pointer;
+}
+
+.agx-input-label__info-icon {
+  width: 16px;
+  height: 16px;
+}
