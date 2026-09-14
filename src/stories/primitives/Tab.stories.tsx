@@ -10,23 +10,32 @@ const meta = {
 export default meta;
 
 function TabItemDemo({
+  children,
   variant,
   count,
   noti,
-  isSelected,
   isDisabled,
 }: {
+  children: string;
   variant: TabItemVariant;
   count: boolean;
   noti: boolean;
-  isSelected: boolean;
   isDisabled: boolean;
 }) {
+  const [isSelected, setIsSelected] = useState(false);
+
   return (
     <Tabs selectedKey={isSelected ? "demo" : "unselected"}>
       <TabList aria-label="Tab demo">
-        <TabItem id="demo" variant={variant} count={count} noti={noti} isDisabled={isDisabled}>
-          Title
+        <TabItem
+          id="demo"
+          variant={variant}
+          count={count}
+          noti={noti}
+          isDisabled={isDisabled}
+          onPress={() => setIsSelected((selected) => !selected)}
+        >
+          {children}
         </TabItem>
       </TabList>
     </Tabs>
@@ -35,13 +44,16 @@ function TabItemDemo({
 
 export const Tab: StoryObj<typeof TabItemDemo> = {
   args: {
+    children: "Title",
     variant: "Container",
     count: false,
     noti: false,
-    isSelected: false,
     isDisabled: false,
   },
   argTypes: {
+    children: {
+      control: "text",
+    },
     variant: {
       control: "select",
       options: ["Container", "Ghost"] satisfies TabItemVariant[],
@@ -50,9 +62,6 @@ export const Tab: StoryObj<typeof TabItemDemo> = {
       control: "boolean",
     },
     noti: {
-      control: "boolean",
-    },
-    isSelected: {
       control: "boolean",
     },
     isDisabled: {

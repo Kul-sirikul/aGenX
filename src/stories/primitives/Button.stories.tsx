@@ -1,22 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Button, type ButtonVariant } from "primitives";
-
-const allVariants: ButtonVariant[] = [
-  "Primary",
-  "Secondary",
-  "Ghost",
-  "Red",
-  "Primary dropdown",
-  "Secondary dropdown",
-];
-
-const primaryOrSecondary: ButtonVariant[] = ["Primary", "Secondary"];
-
-const dropdownVariants: ButtonVariant[] = ["Primary dropdown", "Secondary dropdown"];
-const dropdownVariantLabels: Record<string, string> = {
-  "Primary dropdown": "Primary with arrow button",
-  "Secondary dropdown": "Secondary with arrow button",
-};
+import { Button, ButtonIcon, type ButtonVariant } from "primitives";
 
 const playgroundVariants: ButtonVariant[] = [
   "Primary",
@@ -41,7 +24,7 @@ const meta = {
   argTypes: {
     variant: {
       control: "select",
-      options: allVariants,
+      options: playgroundVariants,
     },
     size: {
       control: "radio",
@@ -64,7 +47,8 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Playground: Story = {
+export const Default: Story = {
+  name: "Button",
   args: {
     variant: "Primary",
   },
@@ -79,54 +63,54 @@ export const Playground: Story = {
   },
 };
 
-export const Primary: Story = {
-  args: {
-    variant: "Primary",
-  },
-  argTypes: {
-    variant: {
-      control: "select",
-      options: primaryOrSecondary,
-    },
-  },
+type ButtonIconArgs = {
+  bg: boolean;
+  size: "20" | "24" | "28" | "36";
+  error: boolean;
+  isDisabled: boolean;
 };
 
-export const Ghost: Story = {
+export const Icon: StoryObj<{ args: ButtonIconArgs }> = {
+  name: "Button icon",
   args: {
-    variant: "Ghost",
+    bg: true,
+    size: "36",
+    error: false,
+    isDisabled: false,
   },
   argTypes: {
-    variant: {
-      table: { disable: true },
-    },
-  },
-};
-
-export const PrimaryWithArrow: Story = {
-  name: "Primary with arrow",
-  args: {
-    variant: "Primary dropdown",
-    leftIcon: true,
-    rightIcon: true,
-  },
-  argTypes: {
-    variant: {
+    bg: {
+      name: "Variant",
       control: {
         type: "select",
-        labels: dropdownVariantLabels,
+        labels: {
+          true: "Button icon have BG",
+          false: "Button icon no BG",
+        },
       },
-      options: dropdownVariants,
+      options: [true, false],
     },
-  },
-};
-
-export const Red: Story = {
-  args: {
-    variant: "Red",
-  },
-  argTypes: {
-    variant: {
-      table: { disable: true },
+    size: {
+      control: "inline-radio",
+      options: ["20", "24", "28", "36"],
     },
+    error: {
+      name: "Error",
+      control: "boolean",
+    },
+    isDisabled: {
+      name: "Disabled",
+      control: "boolean",
+    },
+    // Hide Button's controls, inherited from `meta` — this story renders
+    // ButtonIcon, a different component, and ignores them.
+    variant: { table: { disable: true } },
+    children: { table: { disable: true } },
+    leftIcon: { table: { disable: true } },
+    rightIcon: { table: { disable: true } },
+  } as Record<string, unknown>,
+  render: (args) => {
+    const { bg, size, error, isDisabled } = args as ButtonIconArgs;
+    return <ButtonIcon bg={bg} size={size} error={error} isDisabled={isDisabled} />;
   },
 };

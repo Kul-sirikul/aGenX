@@ -5,6 +5,9 @@ const meta = {
   title: "Primitives/Chip",
   component: Chip,
   argTypes: {
+    children: {
+      control: "text",
+    },
     color: {
       control: "select",
       options: ["Gray", "Purple"] satisfies ChipColor[],
@@ -31,17 +34,19 @@ const meta = {
     },
   },
   args: {
+    children: "Chips",
     color: "Gray",
     size: "S",
     icon: true,
     alert: false,
     defaultSelected: false,
     isDisabled: false,
-    children: "Chips",
   },
 } satisfies Meta<typeof Chip>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Playground: Story = {};
+export const Default: Story = {
+  name: "Chip",
+};

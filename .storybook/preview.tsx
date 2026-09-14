@@ -8,6 +8,14 @@ const preview: Preview = {
     docs: {
       theme: theme,
     },
+    options: {
+      storySort: {
+        order: [
+          "Primitives",
+          ["Button", "Input", "Dropdown", "Checkbox", "Radio", "Tab", "Chip", "Step", "Pagination control"],
+        ],
+      },
+    },
   },
 
   tags: [],
