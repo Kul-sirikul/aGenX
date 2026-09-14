@@ -1,0 +1,75 @@
+/* Indicator ring/dot — shared by Radio, RadioWithLabel and RadioCard */
+
+.agx-radio-box {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  border: var(--border-100-base) solid var(--border-gray-super-light);
+  border-radius: var(--radius-round);
+  background: var(--surface-white);
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.agx-radio-box__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-round);
+  background: var(--surface-purple);
+}
+
+.agx-radio-box[data-selected] {
+  border-color: var(--border-brand);
+}
+
+.agx-radio-box[data-disabled] {
+  background: var(--surface-gray-extra-light);
+  border-color: var(--border-gray-super-light);
+}
+
+.agx-radio-box[data-selected][data-disabled] {
+  border-color: var(--border-gray-extra-light);
+}
+
+.agx-radio-box[data-selected][data-disabled] .agx-radio-box__dot {
+  background: var(--surface-gray);
+}
+
+.agx-radio-box[data-invalid]:not([data-selected]):not([data-disabled]) {
+  border-color: var(--border-error);
+}
+
+/* Radio — indicator with an optional inline label */
+
+.agx-radio {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  font-family: var(--font-family-noto-sans-thai), sans-serif;
+  font-weight: var(--weight-medium);
+  font-size: var(--size-14);
+  line-height: var(--line-height-20);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.agx-radio[data-disabled] {
+  cursor: not-allowed;
+}
+
+/* Hover / focus only affect the unselected box outline */
+
+.agx-radio[data-hovered] .agx-radio-box:not([data-selected]):not([data-disabled]) {
+  border-color: var(--border-brand-light);
+}
+
+.agx-radio[data-focus-visible] .agx-radio-box {
+  box-shadow: var(--shadow-focus-shadow);
+}
+
+.agx-radio[data-focus-visible] .agx-radio-box:not([data-selected]):not([data-disabled]) {
+  border-color: var(--border-brand-light);
+}
