@@ -10,3 +10,5 @@ export * from "./InputWithBadge";
 export * from "./PaginationControl";
 export * from "./TabItem";
 export * from "./TabContainer";
+export * from "./Step";
+export * from "./StepGroup";

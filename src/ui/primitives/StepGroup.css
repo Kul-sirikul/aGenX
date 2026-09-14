@@ -1,0 +1,31 @@
+.agx-step-group {
+  display: flex;
+}
+
+.agx-step-group--vertical {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.agx-step-group--horizontal {
+  flex-direction: row;
+  align-items: center;
+}
+
+.agx-step-group__connector {
+  flex-shrink: 0;
+  background: var(--surface-gray);
+  border-radius: 8px;
+}
+
+.agx-step-group--vertical .agx-step-group__connector {
+  width: 2px;
+  height: 20px;
+  margin-left: 14px;
+}
+
+.agx-step-group--horizontal .agx-step-group__connector {
+  height: 2px;
+  flex: 1 0 0;
+  min-width: 20px;
+}
