@@ -7,5 +7,6 @@ export * from "./DropdownList";
 export * from "./Input";
 export * from "./InputLabel";
 export * from "./InputWithBadge";
+export * from "./PaginationControl";
 export * from "./TabItem";
 export * from "./TabContainer";

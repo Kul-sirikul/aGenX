@@ -1,0 +1,68 @@
+.agx-pagination-control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-6);
+  height: 32px;
+  padding: var(--spacing-8) var(--spacing-12);
+  border-radius: var(--radius-8-medium);
+  background: var(--surface-white);
+  border: var(--border-100-base) solid var(--border-gray-super-light);
+  color: var(--text-primary);
+  font-family: var(--font-family-noto-sans-thai), sans-serif;
+  font-weight: var(--weight-medium);
+  font-size: var(--size-12);
+  line-height: var(--line-height-16);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.agx-pagination-control__icon {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+.agx-pagination-control[data-hovered] {
+  color: var(--text-brand);
+}
+
+.agx-pagination-control[data-disabled] {
+  background: var(--surface-gray-extra-light);
+  color: var(--text-disable);
+  cursor: not-allowed;
+}
+
+/* Page: fixed square */
+
+.agx-pagination-control--page {
+  flex-direction: column;
+  width: 32px;
+  padding: var(--spacing-8);
+}
+
+.agx-pagination-control--page.agx-pagination-control--selected {
+  background: var(--surface-purple-extra-light);
+  border-color: var(--border-brand-light);
+  color: var(--text-brand);
+}
+
+/* Ellipsis: static, no background/border/interaction */
+
+.agx-pagination-control--ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 10px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-8-medium);
+  color: var(--text-primary);
+  font-family: var(--font-family-noto-sans-thai), sans-serif;
+  font-weight: var(--weight-medium);
+  font-size: var(--size-12);
+  line-height: var(--line-height-16);
+}
