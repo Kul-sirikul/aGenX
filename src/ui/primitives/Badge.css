@@ -1,0 +1,163 @@
+.agx-badge {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-4);
+  font-family: var(--font-family-noto-sans-thai), sans-serif;
+  font-weight: var(--weight-medium);
+  line-height: var(--line-height-16);
+  white-space: nowrap;
+}
+
+.agx-badge--s {
+  padding: var(--spacing-0) var(--spacing-4);
+  border-radius: var(--radius-4-xsmall);
+  font-size: var(--size-10);
+}
+
+.agx-badge--m {
+  padding: var(--spacing-2) var(--spacing-6);
+  border-radius: var(--radius-6-small);
+  font-size: var(--size-12);
+}
+
+.agx-badge__circle {
+  flex-shrink: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: var(--radius-round);
+}
+
+.agx-badge__icon-slot {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.agx-badge--s .agx-badge__icon {
+  width: 8px;
+  height: 8px;
+}
+
+.agx-badge--m .agx-badge__icon {
+  width: 12px;
+  height: 12px;
+}
+
+.agx-badge__label {
+  color: inherit;
+}
+
+/* Colors — circle dots don't match any existing token, so they're literal
+   hex values taken directly from the exported assets. */
+
+.agx-badge--gray {
+  background: var(--surface-gray-extra-light);
+  color: var(--text-secondary);
+}
+.agx-badge--gray .agx-badge__circle {
+  background: #acafb6;
+}
+
+.agx-badge--light-gray {
+  background: var(--surface-gray-extra-light);
+  color: var(--text-tertiary);
+}
+.agx-badge--light-gray .agx-badge__circle {
+  background: #acafb6;
+}
+
+.agx-badge--purple {
+  background: var(--surface-purple-extra-light);
+  color: var(--text-brand);
+}
+.agx-badge--purple .agx-badge__circle {
+  background: #af93ff;
+}
+
+.agx-badge--green {
+  background: var(--surface-green-light);
+  color: var(--text-success);
+}
+.agx-badge--green .agx-badge__circle {
+  background: #7dddc8;
+}
+
+.agx-badge--red {
+  background: var(--surface-red-light);
+  color: var(--text-error);
+}
+.agx-badge--red .agx-badge__circle {
+  background: #ff709b;
+}
+
+.agx-badge--orange {
+  background: var(--surface-orange);
+  color: var(--text-warning);
+}
+.agx-badge--orange .agx-badge__circle {
+  background: #f3b497;
+}
+
+.agx-badge--blue {
+  background: var(--surface-blue);
+  color: var(--text-information);
+}
+.agx-badge--blue .agx-badge__circle {
+  background: #a0bcff;
+}
+
+.agx-badge--white {
+  background: var(--surface-white);
+  color: var(--text-secondary);
+  box-shadow: var(--shadow-small-default-shadow);
+}
+.agx-badge--white .agx-badge__circle {
+  background: #acafb6;
+}
+
+.agx-badge--black {
+  background: var(--surface-gray-super-dark);
+  color: var(--text-white);
+  box-shadow: var(--shadow-small-default-shadow);
+}
+.agx-badge--black .agx-badge__circle {
+  background: #7f838a;
+}
+
+/* Badge + trailing action (e.g. a "Resend" link) */
+
+.agx-badge-group {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-6);
+}
+
+.agx-badge-action {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  border: none;
+  background: transparent;
+  padding: 0;
+  color: var(--text-tertiary);
+  font-family: var(--font-family-noto-sans-thai), sans-serif;
+  font-weight: var(--weight-medium);
+  font-size: var(--size-10);
+  line-height: var(--line-height-16);
+  cursor: pointer;
+}
+
+.agx-badge-action:hover {
+  color: var(--text-secondary);
+}
+
+.agx-badge-action__icon {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+}
+
+.agx-badge-action__label {
+  color: inherit;
+}
