@@ -1,0 +1,63 @@
+.agx-tooltip {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-8);
+  padding: var(--spacing-4) var(--spacing-12);
+  background: var(--surface-gray-super-dark);
+  border-radius: var(--radius-8-medium);
+  color: var(--text-white);
+  font-family: var(--font-family-noto-sans-thai), sans-serif;
+  font-weight: var(--weight-medium);
+  font-size: var(--size-12);
+  line-height: var(--line-height-16);
+  text-align: center;
+  white-space: nowrap;
+  outline: none;
+}
+
+/* Tag-list content — a row of Tag chips instead of centered text */
+.agx-tooltip--tags {
+  flex-direction: row;
+  align-items: center;
+  padding: var(--spacing-8);
+  border-radius: var(--radius-12-large);
+}
+
+/* Image + caption content — the caption wraps, unlike the plain-text tooltip */
+.agx-tooltip--image {
+  padding: var(--spacing-12);
+  text-align: left;
+  white-space: normal;
+  max-width: 220px;
+}
+
+.agx-tooltip__image {
+  display: block;
+  width: 100%;
+  height: 108px;
+  object-fit: cover;
+  border-radius: var(--radius-4-xsmall);
+}
+
+.agx-tooltip__arrow {
+  color: var(--surface-gray-super-dark);
+}
+
+.agx-tooltip__arrow svg {
+  display: block;
+}
+
+/* The base arrow shape points down — correct as-is for a tooltip placed
+   above its trigger (data-placement="top"); every other placement needs a
+   rotation to point back at the trigger. */
+.agx-tooltip__arrow[data-placement="bottom"] svg {
+  transform: rotate(180deg);
+}
+.agx-tooltip__arrow[data-placement="left"] svg {
+  transform: rotate(-90deg);
+}
+.agx-tooltip__arrow[data-placement="right"] svg {
+  transform: rotate(90deg);
+}
