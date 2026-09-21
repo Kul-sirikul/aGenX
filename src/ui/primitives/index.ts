@@ -18,3 +18,5 @@ export * from "./TabItem";
 export * from "./TabContainer";
 export * from "./Step";
 export * from "./StepGroup";
+export * from "./Toggle";
+export * from "./ToggleWithLabel";

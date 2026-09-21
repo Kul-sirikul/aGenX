@@ -1,0 +1,78 @@
+.agx-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  cursor: pointer;
+}
+
+.agx-toggle[data-disabled] {
+  cursor: not-allowed;
+  opacity: var(--opacity-button-disable);
+}
+
+.agx-toggle__track {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  flex-shrink: 0;
+  padding: 2px;
+  border-radius: var(--radius-round);
+  /* Figma only specifies the "on" (purple) track — off reuses the same
+     neutral-gray fill Checkbox/Radio use for their own inactive states. */
+  background: var(--surface-gray);
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.agx-toggle[data-selected] .agx-toggle__track {
+  background: var(--surface-purple);
+}
+
+.agx-toggle[data-focus-visible] .agx-toggle__track {
+  box-shadow: var(--shadow-focus-shadow);
+}
+
+.agx-toggle__knob {
+  display: block;
+  border-radius: var(--radius-round);
+  background: var(--surface-white);
+  box-shadow: var(--shadow-small-default-shadow);
+  transition: transform 0.15s ease;
+}
+
+.agx-toggle__label {
+  font-family: var(--font-family-noto-sans-thai), sans-serif;
+  font-weight: var(--weight-medium);
+  font-size: var(--size-14);
+  line-height: var(--line-height-20);
+  color: var(--text-primary);
+}
+
+/* Sizes */
+
+.agx-toggle--s .agx-toggle__track {
+  width: 38px;
+  height: 20px;
+}
+
+.agx-toggle--s .agx-toggle__knob {
+  width: 16px;
+  height: 16px;
+}
+
+.agx-toggle--s[data-selected] .agx-toggle__knob {
+  transform: translateX(18px);
+}
+
+.agx-toggle--m .agx-toggle__track {
+  width: 46px;
+  height: 24px;
+}
+
+.agx-toggle--m .agx-toggle__knob {
+  width: 20px;
+  height: 20px;
+}
+
+.agx-toggle--m[data-selected] .agx-toggle__knob {
+  transform: translateX(22px);
+}
