@@ -1,0 +1,94 @@
+.agx-toast {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  width: 400px;
+  max-width: 100%;
+  padding: var(--spacing-12) var(--spacing-16);
+  border-radius: var(--radius-8-medium);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.agx-toast--default {
+  background: var(--surface-gray-extra-dark-90pct);
+  box-shadow: var(--shadow-small-default-shadow);
+}
+
+.agx-toast--failed {
+  background: var(--surface-red-90pct);
+  box-shadow: var(--glass-small-shadow);
+}
+
+.agx-toast__content {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+.agx-toast__status {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-6);
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+.agx-toast__status-icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: var(--text-white);
+}
+
+.agx-toast__message {
+  flex: 1 0 0;
+  min-width: 0;
+  margin: 0;
+  font-family: var(--font-family-noto-sans-thai), sans-serif;
+  font-weight: var(--weight-medium);
+  font-size: var(--size-14);
+  line-height: var(--line-height-20);
+  color: var(--text-white);
+  white-space: nowrap;
+}
+
+.agx-toast__button {
+  flex-shrink: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font-family: var(--font-family-noto-sans-thai), sans-serif;
+  font-weight: var(--weight-semibold);
+  font-size: var(--size-14);
+  line-height: var(--line-height-20);
+  color: var(--text-white);
+  text-decoration: underline;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+/* The action button reads smaller in the Failed state — matches Figma spec. */
+.agx-toast--failed .agx-toast__button {
+  font-size: var(--size-12);
+  line-height: var(--line-height-16);
+}
+
+.agx-toast__close {
+  flex-shrink: 0;
+  display: flex;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--text-white);
+  cursor: pointer;
+}
+
+.agx-toast__close-icon {
+  width: 16px;
+  height: 16px;
+}

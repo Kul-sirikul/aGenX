@@ -26,4 +26,5 @@ export * from "./InputTagLabel";
 export * from "./AdditionalTag";
 export * from "./Toggle";
 export * from "./ToggleWithLabel";
+export * from "./Toast";
 export * from "./Tooltip";
