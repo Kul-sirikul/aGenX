@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Input, InputLabel, InputWithBadge, type InputSize } from "primitives";
 
 const meta = {
-  title: "Primitives/Input",
+  title: "Data entry/Input",
   component: Input,
   argTypes: {
     // Control config only — row order is set by key order in `args` below,

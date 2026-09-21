@@ -19,7 +19,7 @@ const playgroundVariantLabels: Record<string, string> = {
 };
 
 const meta = {
-  title: "Primitives/Button",
+  title: "Foundation/Button",
   component: Button,
   argTypes: {
     variant: {

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Step, StepGroup, type StepStatus, type StepGroupDirection, type StepGroupItem } from "primitives";
 
 const meta = {
-  title: "Primitives/Step",
+  title: "Navigation/Step",
   component: Step,
   argTypes: {
     status: {

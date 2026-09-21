@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Checkbox, CheckboxCard, CheckboxWithLabel, type CheckboxCardSize } from "primitives";
 
 const meta = {
-  title: "Primitives/Checkbox",
+  title: "Data entry/Checkbox",
   component: Checkbox,
 } satisfies Meta<typeof Checkbox>;
 

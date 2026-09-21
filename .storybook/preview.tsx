@@ -11,8 +11,14 @@ const preview: Preview = {
     options: {
       storySort: {
         order: [
-          "Primitives",
-          ["Button", "Input", "Dropdown", "Checkbox", "Radio", "Tab", "Chip", "Step", "Pagination control"],
+          "Foundation",
+          ["Button"],
+          "Navigation",
+          ["Pagination control", "Tab", "Step"],
+          "Data entry",
+          ["Chip", "Checkbox", "Dropdown", "Input", "Radio", "Toggle"],
+          "Data display",
+          ["Badge", "Alert", "Tag", "Toast", "Tooltip"],
         ],
       },
     },

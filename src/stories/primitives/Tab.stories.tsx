@@ -4,7 +4,7 @@ import { Tabs, TabList } from "react-aria-components";
 import { TabItem, TabContainer, type TabItemVariant, type TabContainerItem } from "primitives";
 
 const meta = {
-  title: "Primitives/Tab",
+  title: "Navigation/Tab",
 } satisfies Meta;
 
 export default meta;

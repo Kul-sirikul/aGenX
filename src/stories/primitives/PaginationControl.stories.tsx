@@ -3,7 +3,7 @@ import { useState } from "react";
 import { PaginationControl, type PaginationControlVariant } from "primitives";
 
 const meta = {
-  title: "Primitives/Pagination control",
+  title: "Navigation/Pagination control",
   component: PaginationControl,
   argTypes: {
     variant: {

@@ -4,7 +4,7 @@ import { ListBox, type Key } from "react-aria-components";
 import { Dropdown, DropdownItem, DropdownList, type DropdownVariant, type DropdownSize, type DropdownItemType } from "primitives";
 
 const meta = {
-  title: "Primitives/Dropdown",
+  title: "Data entry/Dropdown",
   component: DropdownItem,
   argTypes: {
     type: {
