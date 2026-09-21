@@ -1,0 +1,91 @@
+.agx-tag {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  background: var(--surface-purple-extra-light);
+  border: var(--border-100-base) solid var(--border-brand-extra-light);
+  box-shadow: var(--shadow-small-default-shadow);
+  color: var(--text-brand);
+  font-family: var(--font-family-noto-sans-thai), sans-serif;
+  font-weight: var(--weight-medium);
+  white-space: nowrap;
+  transition: border-color 0.15s ease;
+}
+
+.agx-tag--clickable {
+  cursor: pointer;
+}
+
+.agx-tag[data-selected] {
+  border-color: var(--border-brand-light);
+}
+
+/* Type — casing only, independent of size */
+
+.agx-tag--capital .agx-tag__label {
+  text-transform: uppercase;
+}
+
+/* Size — padding/radius/gap/type scale, independent of type */
+
+.agx-tag--s {
+  gap: var(--spacing-2);
+  padding: var(--spacing-0) var(--spacing-6);
+  border-radius: var(--radius-4-xsmall);
+  font-size: var(--size-10);
+  line-height: var(--line-height-16);
+}
+
+.agx-tag--m {
+  gap: var(--spacing-4);
+  padding: var(--spacing-2) var(--spacing-8);
+  border-radius: var(--radius-6-small);
+  font-size: var(--size-12);
+  line-height: var(--line-height-16);
+}
+
+.agx-tag--l {
+  gap: var(--spacing-4);
+  padding: var(--spacing-2) var(--spacing-8);
+  border-radius: var(--radius-6-small);
+  font-size: var(--size-14);
+  line-height: var(--line-height-20);
+}
+
+.agx-tag__icon {
+  width: 12px;
+  height: 12px;
+}
+
+.agx-tag--s .agx-tag__icon {
+  width: 10px;
+  height: 10px;
+}
+
+.agx-tag__remove,
+.agx-tag__more {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--icon-purple-light);
+}
+
+.agx-tag[data-removable] .agx-tag__remove,
+.agx-tag:hover .agx-tag__remove,
+.agx-tag[data-selected] .agx-tag__remove {
+  display: inline-flex;
+}
+
+.agx-tag:hover .agx-tag__more,
+.agx-tag[data-selected] .agx-tag__more {
+  display: inline-flex;
+}
+
+.agx-tag[data-selected] .agx-tag__more {
+  color: var(--icon-purple);
+}

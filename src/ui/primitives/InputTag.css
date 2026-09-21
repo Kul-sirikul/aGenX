@@ -1,0 +1,35 @@
+.agx-input-tag {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-4);
+  width: 100%;
+  padding: var(--spacing-8) var(--spacing-12);
+  border: var(--border-100-base) solid var(--border-gray-super-light);
+  border-radius: var(--radius-8-medium);
+  background: var(--surface-white);
+  box-shadow: var(--shadow-small-default-shadow);
+  transition: border-color 0.15s ease;
+}
+
+.agx-input-tag:focus-within {
+  border-color: var(--border-brand);
+}
+
+.agx-input-tag__control {
+  flex: 1 0 60px;
+  min-width: 60px;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-family-noto-sans-thai), sans-serif;
+  font-weight: var(--weight-medium);
+  font-size: var(--size-14);
+  line-height: var(--line-height-20);
+  color: var(--text-primary);
+}
+
+.agx-input-tag__control::placeholder {
+  color: var(--text-tertiary);
+}
