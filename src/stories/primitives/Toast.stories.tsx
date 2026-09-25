@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Toast, type ToastState } from "primitives";
 
 const meta = {
-  title: "Data display/Toast",
+  title: "Data display/Toast notifications",
 } satisfies Meta;
 
 export default meta;
@@ -15,7 +15,7 @@ type ToastArgs = {
 };
 
 export const Default: StoryObj<{ args: ToastArgs }> = {
-  name: "Toasts",
+  name: "Toast notification",
   args: {
     text: "Place holder",
     state: "Default",

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Radio, RadioCard, RadioWithLabel, type RadioCardSize } from "primitives";
 
 const meta = {
-  title: "Data entry/Radio",
+  title: "Data entry/Radio button",
   component: Radio,
 } satisfies Meta<typeof Radio>;
 
