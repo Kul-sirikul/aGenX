@@ -41,23 +41,14 @@
   border-radius: var(--radius-4-xsmall);
 }
 
+/* The arrow's svg is drawn natively per placement (see ARROW_SHAPES in
+   Tooltip.tsx) with its width/height already matching that shape's real
+   footprint, so the wrapper needs no placement-specific sizing or rotation
+   — it just hugs the svg it's given. */
 .agx-tooltip__arrow {
   color: var(--surface-gray-super-dark);
 }
 
 .agx-tooltip__arrow svg {
   display: block;
-}
-
-/* The base arrow shape points down — correct as-is for a tooltip placed
-   above its trigger (data-placement="top"); every other placement needs a
-   rotation to point back at the trigger. */
-.agx-tooltip__arrow[data-placement="bottom"] svg {
-  transform: rotate(180deg);
-}
-.agx-tooltip__arrow[data-placement="left"] svg {
-  transform: rotate(-90deg);
-}
-.agx-tooltip__arrow[data-placement="right"] svg {
-  transform: rotate(90deg);
 }

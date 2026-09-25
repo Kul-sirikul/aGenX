@@ -85,7 +85,15 @@ export const Default: StoryObj<{ args: TooltipArgs }> = {
     return (
       <div style={playgroundRowStyle}>
         <p style={playgroundTextStyle}>Playground</p>
-        <Tooltip content={text} placement={placement}>
+        {/* `offset` is the gap from the trigger to the tooltip's own content
+            box — it doesn't know about the arrow, which then extends 6px
+            further out from that box toward the trigger (the arrow's own
+            thickness, from its 6-unit-tall triangle). offset={0} therefore
+            puts the *box* flush against the trigger, which pushes the arrow
+            6px past it, overlapping the trigger instead of touching it.
+            Setting offset to that same 6px is what actually makes the
+            arrow's own tip land flush with zero gap. */}
+        <Tooltip content={text} placement={placement} offset={6}>
           <span role="button" tabIndex={0} aria-label="More information" style={infoTriggerStyle}>
             <InfoIcon />
           </span>
