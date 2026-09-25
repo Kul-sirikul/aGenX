@@ -6,6 +6,8 @@ export * from "./Checkbox";
 export * from "./CheckboxCard";
 export * from "./CheckboxWithLabel";
 export * from "./Chip";
+export * from "./DatePicker";
+export * from "./DateRangePicker";
 export * from "./Dropdown";
 export * from "./DropdownItem";
 export * from "./DropdownList";

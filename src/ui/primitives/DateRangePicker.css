@@ -1,0 +1,163 @@
+/* Own inner gap so "date - date" sits tighter than the Group's spacing to
+   the calendar icon button (which stays at the shared --spacing-8). */
+.agx-date-range-inputs {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+/* Override the shared wrapper's flex-grow (meant for the single-date field
+   filling its whole box) so each side hugs its own content instead of
+   stretching to fill half the available width — otherwise "date" sits at
+   the left of an over-wide box with dead space before the separator. */
+.agx-date-range-inputs .agx-date-input-wrapper {
+  flex: 0 1 auto;
+}
+
+/* The shared placeholder is normally `position: absolute; inset: 0`,
+   stretched to the wrapper's own size — fine for the single-date field,
+   whose wrapper is meant to be wide. Here the wrapper's *width* is
+   determined by its content, and the invisible "mm/dd/yyyy" segments are
+   wider than "date", so left unchanged the wrapper (and the gap before the
+   separator) would inherit that width. Flip which element drives sizing:
+   the placeholder goes back into normal flow (content-sized, so the
+   wrapper hugs "date"), and the segmented DateInput is pulled out of flow
+   instead, clipped to whatever width that leaves and covered by the
+   placeholder's higher z-index. */
+.agx-date-range-inputs .agx-date-field__placeholder {
+  position: relative;
+  inset: auto;
+  z-index: 1;
+}
+
+.agx-date-range-inputs .agx-date-input-wrapper:has(.agx-date-field__placeholder) .agx-date-input {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.agx-date-field__separator {
+  flex-shrink: 0;
+  font-family: var(--font-family-noto-sans-thai), sans-serif;
+  font-weight: var(--weight-medium);
+  font-size: var(--size-14);
+  line-height: var(--line-height-20);
+  color: var(--text-tertiary);
+}
+
+.agx-calendar--range {
+  width: max-content;
+}
+
+/* 20px left/right (same as Single/Date-and-time) and a 16px gap between
+   the two months, matching Figma — now that the nav buttons are nested in
+   each month's own header instead of sitting outside both of them, this
+   row only ever contains the two 224px month columns. */
+.agx-calendar__body--range {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-16);
+  padding: var(--spacing-16) var(--spacing-20) var(--spacing-12) var(--spacing-20);
+  margin-top: 0;
+}
+
+.agx-calendar__month {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Each month owns its own nav button (previous on the left month, next on
+   the right) instead of the two arrows sitting outside both months — this
+   is what keeps them from extending past each month's own 224px-wide
+   container. No left/right padding here (unlike the base
+   .agx-calendar__header) so the arrow/spacer sit flush against the same
+   edges as the grid below them, matching Figma, instead of being inset
+   and misaligned with it. The heading grows to fill the remaining space
+   and centers its own text; the *other* side gets a same-width blank
+   spacer so the heading centers correctly regardless of which side
+   actually has a button. */
+.agx-calendar__header--range {
+  gap: var(--spacing-4);
+  padding: 0 0 var(--spacing-12);
+}
+
+.agx-calendar__header--range .agx-calendar__heading {
+  flex: 1 0 0;
+  text-align: center;
+}
+
+.agx-calendar__nav-spacer {
+  width: 20px;
+  flex-shrink: 0;
+}
+
+/* 2px vertical breathing room between week rows, just for the range grids
+   — enough to read each week's gray band as its own rounded pill instead
+   of one solid block. `border-collapse: collapse` (the shared default,
+   needed elsewhere to stop the day cells from getting visible gridlines)
+   ignores border-spacing entirely, so this switches to `separate` with 0
+   horizontal spacing to keep same-row cells flush. */
+.agx-calendar--range .agx-calendar__grid {
+  border-collapse: separate;
+  border-spacing: 0 var(--spacing-2);
+}
+
+/* Scoped to .agx-calendar--range so this never leaks into the plain
+   single-date Calendar's [data-selected] styling — both CSS files load
+   globally whenever DatePicker and DateRangePicker are used together.
+   Flat/square by default so adjacent in-range cells read as one
+   continuous gray band, rounded only where that band actually starts or
+   ends. That's not always the table's own first/last column — a range
+   that spills into a leading/trailing "outside month" day (shown dimmed,
+   not part of the highlighted band) or across the month boundary between
+   the two grids also needs the edge of the band rounded right where the
+   band itself stops, so this checks each cell's actual neighbor rather
+   than only the row boundary. */
+.agx-calendar--range .agx-calendar__cell[data-selected]:not([data-selection-start]):not([data-selection-end]) {
+  background: var(--surface-gray-extra-light);
+  color: var(--text-primary);
+  font-weight: var(--weight-medium);
+  border-radius: 0;
+}
+
+.agx-calendar--range td:first-child .agx-calendar__cell[data-selected]:not([data-selection-start]):not([data-selection-end]),
+.agx-calendar--range td:not(:has(.agx-calendar__cell[data-selected])) + td .agx-calendar__cell[data-selected]:not([data-selection-start]):not([data-selection-end]) {
+  border-radius: var(--radius-8-medium) 0 0 var(--radius-8-medium);
+}
+
+.agx-calendar--range td:has(.agx-calendar__cell[data-selected]):not(:has(+ td .agx-calendar__cell[data-selected]))
+  .agx-calendar__cell[data-selected]:not([data-selection-start]):not([data-selection-end]) {
+  border-radius: 0 var(--radius-8-medium) var(--radius-8-medium) 0;
+}
+
+/* Today, when it falls in the middle of the range (not an endpoint),
+   keeps the gray in-range background but still needs to read as "today"
+   — the base rule above flattens its text to the normal in-range color,
+   so this puts the brand purple back just for that one cell. */
+.agx-calendar--range .agx-calendar__cell[data-today][data-selected]:not([data-selection-start]):not([data-selection-end]) {
+  color: var(--text-brand);
+}
+
+.agx-calendar--range .agx-calendar__cell[data-selection-start],
+.agx-calendar--range .agx-calendar__cell[data-selection-end] {
+  background: var(--surface-purple);
+  color: var(--text-white);
+  font-weight: var(--weight-semibold);
+}
+
+/* The start/end date still gets its endpoint attributes on the "outside
+   month" echo of that same day in the *other* month's grid (e.g. the
+   range's start date, shown dimmed as a leading day in the next month's
+   grid, right before that month's own day 1) — RAC marks it regardless of
+   which grid renders it. Left alone, that reads as a second, confusing
+   "start" indicator; a range only has one real start and one real end, so
+   suppress the endpoint styling wherever the day isn't actually part of
+   that grid's own month. */
+.agx-calendar--range .agx-calendar__cell[data-outside-month][data-selection-start],
+.agx-calendar--range .agx-calendar__cell[data-outside-month][data-selection-end] {
+  background: none;
+  color: var(--text-disable);
+  font-weight: var(--weight-medium);
+}

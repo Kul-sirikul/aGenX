@@ -1,0 +1,387 @@
+/* ---- Field (matches Figma "Date selection" shared state system) ---- */
+
+.agx-date-field {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  align-items: flex-start;
+  width: 220px;
+}
+
+.agx-date-field__label-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.agx-date-field__label {
+  font-family: var(--font-family-noto-sans-thai), sans-serif;
+  font-weight: var(--weight-medium);
+  font-size: var(--size-14);
+  line-height: var(--line-height-20);
+  color: var(--text-primary);
+}
+
+.agx-date-field__info-icon {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  color: var(--icon-gray);
+}
+
+.agx-date-field__box {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  width: 100%;
+  padding: var(--spacing-8) var(--spacing-12);
+  background: var(--surface-white);
+  border: var(--border-100-base) solid var(--border-gray-super-light);
+  border-radius: var(--radius-8-medium);
+  box-shadow: var(--shadow-small-default-shadow);
+  outline: none;
+}
+
+.agx-date-field__box[data-focus-within] {
+  border-color: var(--border-brand);
+}
+
+/* react-aria-components renders a hidden native <input> here for autofill
+   support. The project's reset.css sets `all: unset` on every <input>,
+   which strips the browser's own `[hidden] { display: none }` rule too —
+   without this, the raw ISO date value renders on top of the segments. */
+.agx-date-field__box input[hidden] {
+  display: none !important;
+}
+
+.agx-date-field__box[data-invalid] {
+  border-color: var(--border-error);
+}
+
+.agx-date-field__box[data-disabled] {
+  background: var(--surface-gray-extra-light);
+}
+
+.agx-date-input-wrapper {
+  position: relative;
+  flex: 1 0 0;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.agx-date-input {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-family-noto-sans-thai), sans-serif;
+  font-weight: var(--weight-medium);
+  font-size: var(--size-14);
+  line-height: var(--line-height-20);
+  color: var(--text-primary);
+}
+
+/* Static "date" placeholder, shown whenever the field has no value —
+   matches Figma's Default and Focus states, which both read "date" (only
+   Selected/Focus+Selected show the real formatted value). Clicks still pass
+   through (pointer-events: none) to focus the real segments underneath. */
+.agx-date-field__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  background: var(--surface-white);
+  font-family: var(--font-family-noto-sans-thai), sans-serif;
+  font-weight: var(--weight-medium);
+  font-size: var(--size-14);
+  line-height: var(--line-height-20);
+  color: var(--text-tertiary);
+  pointer-events: none;
+}
+
+.agx-date-field__box[data-disabled] .agx-date-field__placeholder {
+  background: var(--surface-gray-extra-light);
+}
+
+.agx-date-segment {
+  outline: none;
+  border-radius: var(--radius-4-xsmall);
+}
+
+.agx-date-segment[data-placeholder] {
+  color: var(--text-tertiary);
+}
+
+.agx-date-segment[data-focused] {
+  background: var(--surface-purple-extra-light);
+  color: var(--text-brand);
+}
+
+.agx-date-field__icon-button {
+  flex-shrink: 0;
+  display: flex;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--icon-gray);
+  cursor: pointer;
+}
+
+.agx-date-field__icon {
+  width: 16px;
+  height: 16px;
+}
+
+.agx-date-field__help {
+  font-family: var(--font-family-noto-sans-thai), sans-serif;
+  font-weight: var(--weight-medium);
+  font-size: var(--size-12);
+  line-height: var(--line-height-16);
+  color: var(--text-tertiary);
+}
+
+.agx-date-field__help--error {
+  color: var(--text-error);
+}
+
+/* ---- Calendar popover ---- */
+
+.agx-calendar__dialog {
+  outline: none;
+}
+
+.agx-calendar {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  background: var(--surface-white);
+  border: var(--border-100-base) solid var(--border-gray-super-light);
+  border-radius: var(--radius-12-large);
+  box-shadow: var(--shadow-medium-default-shadow);
+  overflow: hidden;
+  outline: none;
+}
+
+/* Wraps the nav+grid column and the time columns side by side, so the time
+   columns sit flush against the popover's own top edge (beside the nav row
+   too, not just the grid) instead of being indented below it. */
+/* flex-start (not the flex default of stretch) so the date-side column
+   always sizes to its own natural content — otherwise, before the
+   ResizeObserver's first measurement lands, the time columns' 262px
+   fallback height would stretch date-side to match it too, and the
+   observer would then lock onto that wrong, stretched height instead of
+   date-side's real content height. */
+.agx-calendar__top-wrapper {
+  display: flex;
+  align-items: flex-start;
+}
+
+/* When time columns are present, Figma narrows the date-side's own right
+   inset from the usual 20px (shared with Single/Range) to 16px, so both
+   the nav row's arrow and the grid's last column sit the same distance
+   from the divider — applied to both header and body so they stay in
+   sync with each other, not just with the grid. */
+.agx-calendar__top-wrapper:has(.agx-time-columns) .agx-calendar__header,
+.agx-calendar__top-wrapper:has(.agx-time-columns) .agx-calendar__body {
+  padding-right: var(--spacing-16);
+}
+
+.agx-calendar__date-side {
+  display: flex;
+  flex-direction: column;
+}
+
+/* The month-change arrows sit flush against the same 20px left/right
+   padding as the grid and footer, rather than floating inset. */
+.agx-calendar__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-16) var(--spacing-20) 0 var(--spacing-20);
+}
+
+.agx-calendar__nav {
+  display: flex;
+  padding: var(--spacing-2);
+  border: none;
+  background: none;
+  color: var(--icon-gray);
+  border-radius: var(--radius-6-small);
+  cursor: pointer;
+  outline: none;
+}
+
+.agx-calendar__nav[data-disabled] {
+  color: var(--icon-gray-super-light);
+  cursor: default;
+}
+
+.agx-calendar__nav[data-focus-visible] {
+  box-shadow: var(--shadow-focus-shadow);
+}
+
+.agx-calendar__nav-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.agx-calendar__heading {
+  margin: 0;
+  font-family: var(--font-family-noto-sans-thai), sans-serif;
+  font-weight: var(--weight-medium);
+  font-size: var(--size-14);
+  line-height: var(--line-height-20);
+  color: var(--text-primary);
+}
+
+/* 16px above and 12px below the day grid, 20px on the same left/right edge
+   as the header and footer (narrowed to 16px on the right when time
+   columns are present — see .agx-calendar__top-wrapper above). `padding`
+   on <table> is silently ignored once border-collapse: collapse is set, so
+   it lives on this wrapping div instead of on .agx-calendar__grid itself. */
+.agx-calendar__body {
+  display: flex;
+  padding: var(--spacing-16) var(--spacing-20) var(--spacing-12) var(--spacing-20);
+}
+
+.agx-calendar__grid {
+  border-collapse: collapse;
+}
+
+.agx-calendar__weekday {
+  padding-bottom: var(--spacing-8);
+  font-family: var(--font-family-noto-sans-thai), sans-serif;
+  font-weight: var(--weight-medium);
+  font-size: var(--size-12);
+  line-height: var(--line-height-16);
+  color: var(--text-tertiary);
+  text-align: center;
+}
+
+.agx-calendar__cell {
+  box-sizing: border-box;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family-noto-sans-thai), sans-serif;
+  font-weight: var(--weight-medium);
+  font-size: var(--size-12);
+  line-height: var(--line-height-16);
+  color: var(--text-primary);
+  border-radius: var(--radius-8-medium);
+  cursor: pointer;
+  outline: none;
+}
+
+.agx-calendar__cell[data-outside-month] {
+  color: var(--text-disable);
+}
+
+.agx-calendar__cell[data-hovered] {
+  background: var(--surface-gray-extra-light);
+}
+
+.agx-calendar__cell[data-today] {
+  background: var(--surface-purple-extra-light);
+  color: var(--text-brand);
+}
+
+.agx-calendar__cell[data-selected] {
+  background: var(--surface-purple);
+  color: var(--text-white);
+  font-weight: var(--weight-semibold);
+}
+
+.agx-calendar__cell[data-disabled] {
+  color: var(--text-disable);
+  cursor: default;
+}
+
+.agx-calendar__cell[data-unavailable] {
+  color: var(--text-error);
+  text-decoration: line-through;
+}
+
+.agx-calendar__cell[data-focus-visible] {
+  box-shadow: var(--shadow-focus-shadow);
+}
+
+.agx-calendar__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-8) var(--spacing-20);
+  border-top: var(--border-100-base) solid var(--border-gray-super-light);
+}
+
+.agx-calendar__footer-button {
+  padding: var(--spacing-2);
+  border: none;
+  background: none;
+  border-radius: var(--radius-6-small);
+  font-family: var(--font-family-noto-sans-thai), sans-serif;
+  font-weight: var(--weight-medium);
+  font-size: var(--size-12);
+  line-height: var(--line-height-16);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+/* ---- Time columns (Date and time picker) ---- */
+
+.agx-time-columns {
+  display: flex;
+  border-left: var(--border-100-base) solid var(--border-gray-super-light);
+}
+
+/* Hour and minute columns read as one merged list without their own
+   divider — Figma splits the time side into two distinct sections. */
+.agx-time-column:first-child {
+  border-right: var(--border-100-base) solid var(--border-gray-super-light);
+}
+
+/* Figma has the time side "hug" the whole date-side column's height (nav
+   row + grid together) rather than scroll within a fixed height — the
+   popover measures that column's rendered height in DatePicker.tsx (a
+   ResizeObserver, since it varies with the month's row count) and passes
+   it down as this custom property; 262px is only a fallback for the first
+   paint, before that measurement lands. */
+.agx-time-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  width: 44px;
+  height: var(--agx-time-columns-height, 262px);
+  overflow-y: auto;
+  padding: var(--spacing-12) var(--spacing-6);
+}
+
+.agx-time-column__item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  border: none;
+  background: none;
+  border-radius: var(--radius-8-medium);
+  font-family: var(--font-family-noto-sans-thai), sans-serif;
+  font-weight: var(--weight-medium);
+  font-size: var(--size-12);
+  line-height: var(--line-height-16);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.agx-time-column__item:hover {
+  background: var(--surface-gray-extra-light);
+}
+
+.agx-time-column__item[data-selected] {
+  background: var(--surface-purple);
+  color: var(--text-white);
+  font-weight: var(--weight-semibold);
+}
