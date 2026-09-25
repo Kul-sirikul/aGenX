@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Banner, MessageBox, type MessageBoxType } from "primitives";
+import { Banner, type BannerType, MessageBox, type MessageBoxType } from "primitives";
 
 const meta = {
   title: "Data display/Alert",
@@ -18,7 +18,7 @@ type MessageBoxArgs = {
 };
 
 export const MessageBoxStory: StoryObj<{ args: MessageBoxArgs }> = {
-  name: "Message Box",
+  name: "Message box",
   args: {
     type: "Warning",
     text: "Message box",
@@ -50,6 +50,7 @@ export const MessageBoxStory: StoryObj<{ args: MessageBoxArgs }> = {
 /* ------------------------------------ Banner ------------------------------------ */
 
 type BannerArgs = {
+  type: BannerType;
   showTitle: boolean;
   title: string;
   text: string;
@@ -62,6 +63,7 @@ type BannerArgs = {
 export const BannerStory: StoryObj<{ args: BannerArgs }> = {
   name: "Banner",
   args: {
+    type: "Warning",
     showTitle: true,
     title: "Title",
     text: "Description",
@@ -71,6 +73,11 @@ export const BannerStory: StoryObj<{ args: BannerArgs }> = {
     x: true,
   },
   argTypes: {
+    type: {
+      name: "variant",
+      control: "select",
+      options: ["Default", "Information", "Warning", "Success", "Error"] satisfies BannerType[],
+    },
     showTitle: { control: "boolean" },
     title: { control: "text", if: { arg: "showTitle" } },
     text: { name: "Description", control: "text" },
@@ -80,9 +87,9 @@ export const BannerStory: StoryObj<{ args: BannerArgs }> = {
     x: { control: "boolean" },
   } as Record<string, unknown>,
   render: (args) => {
-    const { text, title, showTitle, buttonText, showButton, icon, x } = args as BannerArgs;
+    const { text, type, title, showTitle, buttonText, showButton, icon, x } = args as BannerArgs;
     return (
-      <Banner title={title} showTitle={showTitle} buttonText={buttonText} showButton={showButton} icon={icon} x={x}>
+      <Banner type={type} title={title} showTitle={showTitle} buttonText={buttonText} showButton={showButton} icon={icon} x={x}>
         {text}
       </Banner>
     );

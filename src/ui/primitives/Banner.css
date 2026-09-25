@@ -5,8 +5,30 @@
   gap: var(--spacing-8);
   width: 100%;
   padding: var(--spacing-12) var(--spacing-16);
-  background: var(--surface-red-90pct);
   color: var(--text-white);
+}
+
+/* Unlike Message box, every Banner state uses the same solid-color-bar +
+   white-text treatment (and the same exclamation icon) — only the
+   background color changes per state. */
+.agx-banner--default {
+  background: var(--surface-gray-dark);
+}
+
+.agx-banner--information {
+  background: var(--icon-blue);
+}
+
+.agx-banner--warning {
+  background: var(--icon-orange);
+}
+
+.agx-banner--success {
+  background: var(--surface-green);
+}
+
+.agx-banner--error {
+  background: var(--surface-red-90pct);
 }
 
 .agx-banner__icon {

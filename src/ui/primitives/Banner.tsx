@@ -1,8 +1,11 @@
 import clsx from "clsx";
 import "./Banner.css";
 
+export type BannerType = "Default" | "Information" | "Warning" | "Success" | "Error";
+
 export type BannerProps = {
   children: React.ReactNode;
+  type?: BannerType;
   title?: string;
   showTitle?: boolean;
   buttonText?: string;
@@ -44,6 +47,7 @@ function CloseIcon() {
 
 export function Banner({
   children,
+  type = "Warning",
   title = "Title",
   showTitle = true,
   buttonText = "Button",
@@ -55,7 +59,7 @@ export function Banner({
   className,
 }: BannerProps) {
   return (
-    <div className={clsx("agx-banner", className)}>
+    <div className={clsx("agx-banner", `agx-banner--${type.toLowerCase()}`, className)}>
       {icon && <ExclamationIcon />}
       {showTitle && (
         <>
