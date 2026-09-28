@@ -20,7 +20,6 @@ const meta = {
 } satisfies Meta<typeof PaginationControl>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
 
 const TOTAL_ITEMS = 97;
 const ITEMS_PER_PAGE = 15;
@@ -90,20 +89,14 @@ function PlaygroundDemo({ withText }: { withText: boolean }) {
 type PlaygroundArgs = { withText: boolean };
 
 export const Playground: StoryObj<{ args: PlaygroundArgs }> = {
+  name: "Pagination controls",
   args: {
     withText: true,
   },
   argTypes: {
     withText: {
       name: "Variant",
-      control: {
-        type: "select",
-        labels: {
-          true: "With text: Yes",
-          false: "With text: No",
-        },
-      },
-      options: [true, false],
+      control: "boolean",
     },
     // Hide the real component's argTypes, inherited from `meta` — Playground
     // composes its own PaginationControl instances and ignores these args.
@@ -113,8 +106,4 @@ export const Playground: StoryObj<{ args: PlaygroundArgs }> = {
     isDisabled: { table: { disable: true } },
   } as Record<string, unknown>,
   render: (args) => <PlaygroundDemo withText={(args as PlaygroundArgs).withText} />,
-};
-
-export const Default: Story = {
-  name: "Pagination control",
 };
