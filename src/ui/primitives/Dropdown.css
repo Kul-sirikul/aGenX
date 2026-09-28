@@ -175,11 +175,14 @@
   line-height: var(--line-height-16);
 }
 
+/* No max-height/overflow here — the popover wraps .agx-dropdown-list, which
+   carries the drop shadow, and an overflow-clipping parent cuts off a
+   child's shadow at its own edge. The 300px cap and scrolling live on
+   .agx-dropdown-list__items instead, so the shadow renders the same way it
+   does for the standalone DropdownList (the "List" story). */
 .agx-dropdown__popover {
   width: var(--trigger-width);
   box-sizing: border-box;
-  max-height: 300px;
-  overflow: auto;
 }
 
 .agx-dropdown__popover[data-entering] {

@@ -14,6 +14,17 @@
 
 .agx-dropdown__popover > .agx-dropdown-list {
   width: 100%;
+  /* The overall popover menu height cap (previously on the popover itself,
+     which clipped this list's own box-shadow — see Dropdown.css). Scrolling
+     happens on .agx-dropdown-list__items below, so the search field and
+     heading stay fixed while only the items scroll. */
+  max-height: 300px;
+}
+
+.agx-dropdown__popover > .agx-dropdown-list .agx-dropdown-list__items {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
 }
 
 .agx-dropdown-list__search {
