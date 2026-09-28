@@ -18,7 +18,7 @@ type MessageBoxArgs = {
 };
 
 export const MessageBoxStory: StoryObj<{ args: MessageBoxArgs }> = {
-  name: "Message box",
+  name: "Call out",
   args: {
     type: "Warning",
     text: "Message box",
