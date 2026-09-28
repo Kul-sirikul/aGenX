@@ -9,16 +9,11 @@ const meta = {
 
 export default meta;
 
-/* ------------------------------- Radio with Label -------------------------------- */
+/* ---------------------------------- Radio ---------------------------------- */
 
-type WithLabelArgs = {
-  label: string;
-  description: string;
-  icon: boolean;
-  isDisabled: boolean;
-};
+type RadioStoryVariant = "With Label" | "Card";
 
-function RadioWithLabelDemo({ label, description, icon, isDisabled }: WithLabelArgs) {
+function RadioWithLabelDemo({ label, description, icon, isDisabled }: { label: string; description: string; icon: boolean; isDisabled: boolean }) {
   const [selected, setSelected] = useState(false);
   return (
     <div style={{ width: 418 }}>
@@ -35,35 +30,21 @@ function RadioWithLabelDemo({ label, description, icon, isDisabled }: WithLabelA
   );
 }
 
-export const WithLabel: StoryObj<{ args: WithLabelArgs }> = {
-  name: "Radio with Label",
-  args: {
-    label: "Setting",
-    description: "",
-    icon: false,
-    isDisabled: false,
-  },
-  argTypes: {
-    label: { control: "text" },
-    description: { name: "Description", control: "text" },
-    icon: { name: "Show icon", control: "boolean" },
-    isDisabled: { name: "Disabled", control: "boolean" },
-  } as Record<string, unknown>,
-  render: (args) => <RadioWithLabelDemo {...(args as WithLabelArgs)} />,
-};
-
-/* ----------------------------------- Radio card ----------------------------------- */
-
-type CardArgs = {
+function RadioCardDemo({
+  children,
+  description,
+  size,
+  badge,
+  badgeLabel,
+  isDisabled,
+}: {
   children: string;
   description: string;
   size: RadioCardSize;
   badge: boolean;
   badgeLabel: string;
   isDisabled: boolean;
-};
-
-function RadioCardDemo({ children, description, size, badge, badgeLabel, isDisabled }: CardArgs) {
+}) {
   const [selected, setSelected] = useState(false);
   return (
     <div style={{ width: 438 }}>
@@ -82,23 +63,57 @@ function RadioCardDemo({ children, description, size, badge, badgeLabel, isDisab
   );
 }
 
-export const Card: StoryObj<{ args: CardArgs }> = {
-  name: "Radio card",
+type RadioArgs = {
+  variant: RadioStoryVariant;
+  label: string;
+  description: string;
+  icon: boolean;
+  size: RadioCardSize;
+  badge: boolean;
+  badgeLabel: string;
+  isDisabled: boolean;
+};
+
+export const Default: StoryObj<{ args: RadioArgs }> = {
+  name: "Radio",
   args: {
-    children: "Setting",
+    variant: "With Label",
+    label: "Setting",
     description: "",
+    icon: false,
     size: "M",
     badge: false,
     badgeLabel: "Label",
     isDisabled: false,
   },
   argTypes: {
-    children: { control: "text" },
+    variant: {
+      control: "select",
+      options: ["With Label", "Card"] satisfies RadioStoryVariant[],
+    },
+    label: { control: "text" },
     description: { name: "Description", control: "text" },
-    size: { control: "inline-radio", options: ["S", "M"] satisfies RadioCardSize[] },
-    badge: { name: "Show badge", control: "boolean" },
-    badgeLabel: { name: "Label", control: "text" },
+    icon: { name: "Show icon", control: "boolean", if: { arg: "variant", eq: "With Label" } },
+    size: { control: "inline-radio", options: ["S", "M"] satisfies RadioCardSize[], if: { arg: "variant", eq: "Card" } },
+    badge: { name: "Show badge", control: "boolean", if: { arg: "variant", eq: "Card" } },
+    badgeLabel: { name: "Label", control: "text", if: { arg: "variant", eq: "Card" } },
     isDisabled: { name: "Disabled", control: "boolean" },
   } as Record<string, unknown>,
-  render: (args) => <RadioCardDemo {...(args as CardArgs)} />,
+  render: (args) => {
+    const a = args as RadioArgs;
+    if (a.variant === "Card") {
+      return (
+        <RadioCardDemo
+          description={a.description}
+          size={a.size}
+          badge={a.badge}
+          badgeLabel={a.badgeLabel}
+          isDisabled={a.isDisabled}
+        >
+          {a.label}
+        </RadioCardDemo>
+      );
+    }
+    return <RadioWithLabelDemo label={a.label} description={a.description} icon={a.icon} isDisabled={a.isDisabled} />;
+  },
 };
