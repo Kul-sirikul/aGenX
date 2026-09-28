@@ -17,6 +17,16 @@ const meta = {
       name: "Show label",
       control: "boolean",
     },
+    optional: {
+      name: "Show 'Optional'",
+      control: "boolean",
+      if: { arg: "showLabel" },
+    },
+    infoIcon: {
+      name: "Show info icon",
+      control: "boolean",
+      if: { arg: "showLabel" },
+    },
     size: {
       control: "inline-radio",
       options: ["S", "M"] satisfies InputSize[],
@@ -60,14 +70,14 @@ const meta = {
     },
   } as Record<string, unknown>,
   args: {
-    // `placeholder`, `label`, and `showLabel` are declared first (as keys,
-    // not just in argTypes) — Storybook's Controls panel orders rows by
-    // where each key first appears across meta.args + story args, not by
-    // argTypes declaration order.
-    placeholder: "Placeholder Text",
+    // Key order here (not argTypes declaration order) sets the Controls
+    // panel row order — `placeholder` sits right after `size` per request.
     label: "Label",
     showLabel: true,
+    optional: true,
+    infoIcon: true,
     size: "M",
+    placeholder: "Placeholder Text",
     leftIcon: false,
     rightIcon: false,
     arrow: false,
@@ -98,13 +108,15 @@ type InputStoryArgs = {
   placeholder: string;
   label: string;
   showLabel: boolean;
+  optional: boolean;
+  infoIcon: boolean;
 };
 
 export const Default: StoryObj<{ args: InputStoryArgs }> = {
   name: "Input",
   render: (args) => {
-    const { showLabel, label, ...inputArgs } = args as InputStoryArgs;
-    return showLabel ? <InputLabel label={label} {...inputArgs} /> : <Input {...inputArgs} />;
+    const { showLabel, label, optional, infoIcon, ...inputArgs } = args as InputStoryArgs;
+    return showLabel ? <InputLabel label={label} optional={optional} infoIcon={infoIcon} {...inputArgs} /> : <Input {...inputArgs} />;
   },
 };
 
@@ -144,6 +156,8 @@ export const WithBadge: StoryObj<{ args: InputWithBadgeArgs }> = {
     // Hide Input's controls, inherited from `meta` — this story renders
     // InputWithBadge, a different component, and ignores them.
     showLabel: { table: { disable: true } },
+    optional: { table: { disable: true } },
+    infoIcon: { table: { disable: true } },
     size: { table: { disable: true } },
     leftIcon: { table: { disable: true } },
     rightIcon: { table: { disable: true } },
