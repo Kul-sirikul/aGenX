@@ -9,17 +9,23 @@ const meta = {
 
 export default meta;
 
-/* ------------------------------ Checkbox with Label ----------------------------- */
+/* -------------------------------- Checkboxs -------------------------------- */
 
-type WithLabelArgs = {
+type CheckboxStoryVariant = "With Label" | "Card";
+
+function CheckboxWithLabelDemo({
+  label,
+  description,
+  icon,
+  isIndeterminate,
+  isDisabled,
+}: {
   label: string;
   description: string;
   icon: boolean;
   isIndeterminate: boolean;
   isDisabled: boolean;
-};
-
-function CheckboxWithLabelDemo({ label, description, icon, isIndeterminate, isDisabled }: WithLabelArgs) {
+}) {
   const [selected, setSelected] = useState(false);
   return (
     <div style={{ width: 418 }}>
@@ -37,28 +43,15 @@ function CheckboxWithLabelDemo({ label, description, icon, isIndeterminate, isDi
   );
 }
 
-export const WithLabel: StoryObj<{ args: WithLabelArgs }> = {
-  name: "Checkbox with Label",
-  args: {
-    label: "Setting",
-    description: "",
-    icon: false,
-    isIndeterminate: false,
-    isDisabled: false,
-  },
-  argTypes: {
-    label: { control: "text" },
-    description: { name: "Description", control: "text" },
-    icon: { name: "Show icon", control: "boolean" },
-    isIndeterminate: { name: "Indeterminate", control: "boolean" },
-    isDisabled: { name: "Disabled", control: "boolean" },
-  } as Record<string, unknown>,
-  render: (args) => <CheckboxWithLabelDemo {...(args as WithLabelArgs)} />,
-};
-
-/* --------------------------------- Checkbox card -------------------------------- */
-
-type CardArgs = {
+function CheckboxCardDemo({
+  children,
+  description,
+  size,
+  badge,
+  badgeLabel,
+  isIndeterminate,
+  isDisabled,
+}: {
   children: string;
   description: string;
   size: CheckboxCardSize;
@@ -66,9 +59,7 @@ type CardArgs = {
   badgeLabel: string;
   isIndeterminate: boolean;
   isDisabled: boolean;
-};
-
-function CheckboxCardDemo({ children, description, size, badge, badgeLabel, isIndeterminate, isDisabled }: CardArgs) {
+}) {
   const [selected, setSelected] = useState(false);
   return (
     <div style={{ width: 438 }}>
@@ -88,11 +79,26 @@ function CheckboxCardDemo({ children, description, size, badge, badgeLabel, isIn
   );
 }
 
-export const Card: StoryObj<{ args: CardArgs }> = {
-  name: "Checkbox card",
+type CheckboxArgs = {
+  variant: CheckboxStoryVariant;
+  label: string;
+  description: string;
+  icon: boolean;
+  size: CheckboxCardSize;
+  badge: boolean;
+  badgeLabel: string;
+  isIndeterminate: boolean;
+  isDisabled: boolean;
+};
+
+export const Default: StoryObj<{ args: CheckboxArgs }> = {
+  name: "Checkboxs",
+  parameters: { layout: "centered" },
   args: {
-    children: "Setting",
+    variant: "With Label",
+    label: "Setting",
     description: "",
+    icon: false,
     size: "M",
     badge: false,
     badgeLabel: "Label",
@@ -100,13 +106,43 @@ export const Card: StoryObj<{ args: CardArgs }> = {
     isDisabled: false,
   },
   argTypes: {
-    children: { control: "text" },
+    variant: {
+      control: "select",
+      options: ["With Label", "Card"] satisfies CheckboxStoryVariant[],
+    },
+    label: { control: "text" },
     description: { name: "Description", control: "text" },
-    size: { control: "inline-radio", options: ["S", "M"] satisfies CheckboxCardSize[] },
-    badge: { name: "Show badge", control: "boolean" },
-    badgeLabel: { name: "Label", control: "text" },
+    icon: { name: "Show icon", control: "boolean", if: { arg: "variant", eq: "With Label" } },
+    size: { control: "inline-radio", options: ["S", "M"] satisfies CheckboxCardSize[], if: { arg: "variant", eq: "Card" } },
+    badge: { name: "Show badge", control: "boolean", if: { arg: "variant", eq: "Card" } },
+    badgeLabel: { name: "Label", control: "text", if: { arg: "variant", eq: "Card" } },
     isIndeterminate: { name: "Indeterminate", control: "boolean" },
     isDisabled: { name: "Disabled", control: "boolean" },
   } as Record<string, unknown>,
-  render: (args) => <CheckboxCardDemo {...(args as CardArgs)} />,
+  render: (args) => {
+    const a = args as CheckboxArgs;
+    if (a.variant === "Card") {
+      return (
+        <CheckboxCardDemo
+          description={a.description}
+          size={a.size}
+          badge={a.badge}
+          badgeLabel={a.badgeLabel}
+          isIndeterminate={a.isIndeterminate}
+          isDisabled={a.isDisabled}
+        >
+          {a.label}
+        </CheckboxCardDemo>
+      );
+    }
+    return (
+      <CheckboxWithLabelDemo
+        label={a.label}
+        description={a.description}
+        icon={a.icon}
+        isIndeterminate={a.isIndeterminate}
+        isDisabled={a.isDisabled}
+      />
+    );
+  },
 };
