@@ -148,6 +148,16 @@ function DropdownPlaygroundDemo(args: PlaygroundArgs) {
 
 export const Default: StoryObj<{ args: PlaygroundArgs }> = {
   name: "Dropdown",
+  // Pushed up (not vertically centered) like the Date picker story — the
+  // popover opens downward, so it needs room below to test without the
+  // canvas scrolling or the popover getting clipped.
+  decorators: [
+    (Story) => (
+      <div style={{ alignSelf: "flex-start", justifySelf: "center", marginTop: "48px" }}>
+        <Story />
+      </div>
+    ),
+  ],
   args: {
     showLabel: true,
     label: "Agent",
