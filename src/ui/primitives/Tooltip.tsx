@@ -37,15 +37,26 @@ const ARROW_SHAPES: Record<TooltipPlacement, { width: number; height: number; d:
 // (most of this project's own components don't). A trigger also needs an
 // interactive ARIA role (e.g. `role="button"`) or Focusable won't attach.
 export function Tooltip({ children, content, placement = "top", delay = 200, offset = 8, className }: TooltipProps) {
-  const arrow = ARROW_SHAPES[placement];
   return (
     <TooltipTrigger delay={delay}>
       <Focusable>{children}</Focusable>
       <AriaTooltip className={clsx("agx-tooltip", className)} placement={placement} offset={offset}>
         <OverlayArrow className="agx-tooltip__arrow">
-          <svg width={arrow.width} height={arrow.height} viewBox={`0 0 ${arrow.width} ${arrow.height}`} aria-hidden="true">
-            <path d={arrow.d} fill="currentColor" />
-          </svg>
+          {/* `placement` here is the *requested* side — react-aria still
+              flips it to whichever side actually has room (e.g. this
+              playground's own "Tooltip image" story asks for "bottom" but
+              gets rendered above its trigger near the bottom of the
+              viewport). Picking the arrow shape from that prop instead of
+              OverlayArrow's own render-prop (the side it actually landed
+              on) pointed the arrow the wrong way whenever a flip happened. */}
+          {({ placement: renderedPlacement }) => {
+            const arrow = ARROW_SHAPES[(renderedPlacement as TooltipPlacement | null) ?? placement];
+            return (
+              <svg width={arrow.width} height={arrow.height} viewBox={`0 0 ${arrow.width} ${arrow.height}`} aria-hidden="true">
+                <path d={arrow.d} fill="currentColor" />
+              </svg>
+            );
+          }}
         </OverlayArrow>
         {content}
       </AriaTooltip>
