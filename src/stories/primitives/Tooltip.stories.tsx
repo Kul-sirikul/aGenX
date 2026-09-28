@@ -130,12 +130,12 @@ function ImageTooltipDemo() {
     <div style={playgroundRowStyle}>
       <p style={playgroundTextStyle}>Playground</p>
       <Tooltip
-        placement="bottom"
+        placement="top"
         className="agx-tooltip--image"
         content={
           <>
             <img className="agx-tooltip__image" src={tooltipExampleImage} alt="" />
-            Tags appear at the bottom of the character card to help you easily filter and find characters.
+            Tags appear at the bottom of the character card to help filter.
           </>
         }
       >
