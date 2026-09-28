@@ -79,17 +79,7 @@ export const Icon: StoryObj<{ args: ButtonIconArgs }> = {
     isDisabled: false,
   },
   argTypes: {
-    bg: {
-      name: "Variant",
-      control: {
-        type: "select",
-        labels: {
-          true: "Button icon have BG",
-          false: "Button icon no BG",
-        },
-      },
-      options: [true, false],
-    },
+    bg: { table: { disable: true } },
     size: {
       control: "inline-radio",
       options: ["20", "24", "28", "36"],
