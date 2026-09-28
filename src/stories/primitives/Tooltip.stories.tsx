@@ -62,52 +62,37 @@ const tagMoreStyle: React.CSSProperties = {
 
 /* ----------------------------------- Tooltip ----------------------------------- */
 
+type TooltipStoryVariant = "Text" | "Tag" | "Image";
+
 type TooltipArgs = {
+  variant: TooltipStoryVariant;
   text: string;
   placement: TooltipPlacement;
 };
 
-export const Default: StoryObj<{ args: TooltipArgs }> = {
-  name: "Tooltip",
-  args: {
-    text: "tooltips",
-    placement: "top",
-  },
-  argTypes: {
-    text: { control: "text" },
-    placement: {
-      control: "inline-radio",
-      options: ["top", "bottom", "left", "right"] satisfies TooltipPlacement[],
-    },
-  } as Record<string, unknown>,
-  render: (args) => {
-    const { text, placement } = args as TooltipArgs;
-    return (
-      <div style={playgroundRowStyle}>
-        <p style={playgroundTextStyle}>Playground</p>
-        {/* `offset` is the gap from the trigger to the tooltip's own content
-            box — it doesn't know about the arrow, which then extends 6px
-            further out from that box toward the trigger (the arrow's own
-            thickness, from its 6-unit-tall triangle). offset={0} therefore
-            puts the *box* flush against the trigger, which pushes the arrow
-            6px past it, overlapping the trigger instead of touching it.
-            Setting offset to that same 6px is what actually makes the
-            arrow's own tip land flush with zero gap. */}
-        <Tooltip content={text} placement={placement} offset={6}>
-          <span role="button" tabIndex={0} aria-label="More information" style={infoTriggerStyle}>
-            <InfoIcon />
-          </span>
-        </Tooltip>
-      </div>
-    );
-  },
-};
+function TextTooltipDemo({ text, placement }: { text: string; placement: TooltipPlacement }) {
+  return (
+    <div style={playgroundRowStyle}>
+      <p style={playgroundTextStyle}>Playground</p>
+      {/* `offset` is the gap from the trigger to the tooltip's own content
+          box — it doesn't know about the arrow, which then extends 6px
+          further out from that box toward the trigger (the arrow's own
+          thickness, from its 6-unit-tall triangle). offset={0} therefore
+          puts the *box* flush against the trigger, which pushes the arrow
+          6px past it, overlapping the trigger instead of touching it.
+          Setting offset to that same 6px is what actually makes the
+          arrow's own tip land flush with zero gap. */}
+      <Tooltip content={text} placement={placement} offset={6}>
+        <span role="button" tabIndex={0} aria-label="More information" style={infoTriggerStyle}>
+          <InfoIcon />
+        </span>
+      </Tooltip>
+    </div>
+  );
+}
 
-/* --------------------------------- Tooltip Tag ---------------------------------- */
-
-export const WithTags: StoryObj = {
-  name: "Tooltip Tag",
-  render: () => (
+function TagTooltipDemo() {
+  return (
     <div style={tagRowStyle}>
       <Tag size="M" type="Capital">
         Team 1
@@ -137,14 +122,11 @@ export const WithTags: StoryObj = {
         </span>
       </Tooltip>
     </div>
-  ),
-};
+  );
+}
 
-/* -------------------------------- Tooltip image --------------------------------- */
-
-export const WithImage: StoryObj = {
-  name: "Tooltip image",
-  render: () => (
+function ImageTooltipDemo() {
+  return (
     <div style={playgroundRowStyle}>
       <p style={playgroundTextStyle}>Playground</p>
       <Tooltip
@@ -162,5 +144,32 @@ export const WithImage: StoryObj = {
         </span>
       </Tooltip>
     </div>
-  ),
+  );
+}
+
+export const Default: StoryObj<{ args: TooltipArgs }> = {
+  name: "Tooltips",
+  args: {
+    variant: "Text",
+    text: "tooltips",
+    placement: "top",
+  },
+  argTypes: {
+    variant: {
+      control: "select",
+      options: ["Text", "Tag", "Image"] satisfies TooltipStoryVariant[],
+    },
+    text: { control: "text", if: { arg: "variant", eq: "Text" } },
+    placement: {
+      control: "inline-radio",
+      options: ["top", "bottom", "left", "right"] satisfies TooltipPlacement[],
+      if: { arg: "variant", eq: "Text" },
+    },
+  } as Record<string, unknown>,
+  render: (args) => {
+    const { variant, text, placement } = args as TooltipArgs;
+    if (variant === "Tag") return <TagTooltipDemo />;
+    if (variant === "Image") return <ImageTooltipDemo />;
+    return <TextTooltipDemo text={text} placement={placement} />;
+  },
 };
