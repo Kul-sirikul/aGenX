@@ -17,7 +17,9 @@ export type BannerProps = {
   className?: string;
 };
 
-// Exact vector path exported from Figma "exclaimation-solid" icon node (12364:24071).
+// Exact vector path exported from Figma "exclaimation-solid" icon node
+// (12364:24071) — used for Warning/Error, matching Message box's own icon
+// (which reuses the identical shape for those two states).
 function ExclamationIcon() {
   return (
     <svg viewBox="0 0 14 14" fill="none" aria-hidden="true" className="agx-banner__icon">
@@ -30,6 +32,45 @@ function ExclamationIcon() {
     </svg>
   );
 }
+
+// Exact vector path exported from Figma "info-solid" icon node — used for
+// Default/Information, same shape reused from Message box's own icon.
+function InfoIcon() {
+  return (
+    <svg viewBox="0 0 14 14" fill="none" aria-hidden="true" className="agx-banner__icon">
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M1.3125 7C1.3125 3.85875 3.85875 1.3125 7 1.3125C10.1412 1.3125 12.6875 3.85875 12.6875 7C12.6875 10.1412 10.1412 12.6875 7 12.6875C3.85875 12.6875 1.3125 10.1412 1.3125 7ZM6.391 6.15883C7.0595 5.82458 7.81258 6.42892 7.63117 7.154L7.21758 8.80833L7.24208 8.79667C7.34488 8.75148 7.46111 8.74754 7.56672 8.78567C7.67234 8.8238 7.75925 8.90108 7.80946 9.00152C7.85968 9.10195 7.86936 9.21785 7.8365 9.32522C7.80363 9.43259 7.73074 9.52321 7.63292 9.57833L7.60958 9.59117C6.9405 9.92542 6.18742 9.32108 6.36883 8.596L6.783 6.94167L6.7585 6.95333C6.7069 6.98201 6.65002 6.99995 6.5913 7.00607C6.53258 7.01218 6.47324 7.00635 6.41683 6.98893C6.36042 6.9715 6.30813 6.94284 6.26309 6.90466C6.21806 6.86649 6.18121 6.8196 6.15478 6.76681C6.12834 6.71402 6.11287 6.65643 6.10928 6.5975C6.10569 6.53858 6.11407 6.47953 6.13391 6.42393C6.15374 6.36832 6.18463 6.31731 6.2247 6.27395C6.26477 6.2306 6.31321 6.19581 6.36708 6.17167L6.391 6.15883ZM7 5.25C7.11603 5.25 7.22731 5.20391 7.30936 5.12186C7.39141 5.03981 7.4375 4.92853 7.4375 4.8125C7.4375 4.69647 7.39141 4.58519 7.30936 4.50314C7.22731 4.42109 7.11603 4.375 7 4.375C6.88397 4.375 6.77269 4.42109 6.69064 4.50314C6.60859 4.58519 6.5625 4.69647 6.5625 4.8125C6.5625 4.92853 6.60859 5.03981 6.69064 5.12186C6.77269 5.20391 6.88397 5.25 7 5.25Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
+// Exact vector path exported from Figma "check-circle" icon node — used for
+// Success, same shape reused from Message box's own icon.
+function CheckCircleIcon() {
+  return (
+    <svg viewBox="0 0 14 14" fill="none" aria-hidden="true" className="agx-banner__icon">
+      <path
+        d="M5.25 7.4375L6.5625 8.75L8.75 5.6875M12.25 7C12.25 7.68944 12.1142 8.37213 11.8504 9.00909C11.5865 9.64605 11.1998 10.2248 10.7123 10.7123C10.2248 11.1998 9.64605 11.5865 9.00909 11.8504C8.37213 12.1142 7.68944 12.25 7 12.25C6.31056 12.25 5.62787 12.1142 4.99091 11.8504C4.35395 11.5865 3.7752 11.1998 3.28769 10.7123C2.80018 10.2248 2.41347 9.64605 2.14963 9.00909C1.8858 8.37213 1.75 7.68944 1.75 7C1.75 5.60761 2.30312 4.27226 3.28769 3.28769C4.27226 2.30312 5.60761 1.75 7 1.75C8.39239 1.75 9.72774 2.30312 10.7123 3.28769C11.6969 4.27226 12.25 5.60761 12.25 7Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+const iconByType: Record<BannerType, () => React.JSX.Element> = {
+  Default: InfoIcon,
+  Information: InfoIcon,
+  Warning: ExclamationIcon,
+  Success: CheckCircleIcon,
+  Error: ExclamationIcon,
+};
 
 // Exact vector path exported from Figma "x" icon node (12364:24074).
 function CloseIcon() {
@@ -58,9 +99,10 @@ export function Banner({
   onClose,
   className,
 }: BannerProps) {
+  const Icon = iconByType[type];
   return (
     <div className={clsx("agx-banner", `agx-banner--${type.toLowerCase()}`, className)}>
-      {icon && <ExclamationIcon />}
+      {icon && <Icon />}
       {showTitle && (
         <>
           <p className="agx-banner__title">{title}</p>
