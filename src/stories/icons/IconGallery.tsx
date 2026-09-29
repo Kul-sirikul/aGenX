@@ -53,6 +53,17 @@ const labelStyle: React.CSSProperties = {
   textOverflow: "ellipsis",
 };
 
+// Shown for the "Copied!" confirmation after a successful copy-to-clipboard.
+const COPIED_COLOR = "#098c6f";
+
+const copiedTextStyle: React.CSSProperties = {
+  margin: 0,
+  fontFamily: "var(--font-family-noto-sans-thai), sans-serif",
+  fontSize: "var(--size-12)",
+  lineHeight: "var(--line-height-16)",
+  color: COPIED_COLOR,
+};
+
 const actionRowStyle: React.CSSProperties = {
   display: "flex",
   gap: "var(--spacing-4, 4px)",
@@ -149,7 +160,7 @@ function IconCard({ name, Icon, svg }: IconGalleryItem) {
           <DownloadIcon />
         </button>
       </div>
-      {copied && <p style={labelStyle}>Copied!</p>}
+      {copied && <p style={copiedTextStyle}>Copied!</p>}
     </div>
   );
 }
