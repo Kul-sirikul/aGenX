@@ -93,6 +93,51 @@ export function AiSolodIcon({ className }: OthersIconProps) {
   );
 }
 
+// Exact vector path exported from Figma "Disconnect" icon node (11044:3674).
+export function DisconnectIcon({ className }: OthersIconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className={className}>
+      <path
+        d="M16 3L21 8M2 12H22C22 13.9778 21.4135 15.9112 20.3147 17.5557C19.2159 19.2002 17.6541 20.4819 15.8268 21.2388C13.9996 21.9957 11.9889 22.1937 10.0491 21.8079C8.10929 21.422 6.32746 20.4696 4.92894 19.0711C3.53041 17.6725 2.578 15.8907 2.19215 13.9509C1.8063 12.0111 2.00433 10.0004 2.76121 8.17317C3.51809 6.3459 4.79981 4.78412 6.4443 3.6853C8.08879 2.58649 10.0222 2 12 2C9.43224 4.69615 8 8.27674 8 12C8 15.7233 9.43224 19.3038 12 22C14.5678 19.3038 16 15.7233 16 12M21 3L16 8"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+// Exact vector path exported from Figma "Connect" icon node (11044:3673).
+export function ConnectIcon({ className }: OthersIconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className={className}>
+      <path
+        d="M22 12C22 17.5228 17.5228 22 12 22M22 12C22 6.47715 17.5228 2 12 2M22 12H2M12 22C6.47715 22 2 17.5228 2 12M12 22C9.43223 19.3038 8 15.7233 8 12C8 8.27674 9.43223 4.69615 12 2M12 22C14.5678 19.3038 16 15.7233 16 12C16 8.27674 14.5678 4.69615 12 2M2 12C2 6.47715 6.47715 2 12 2"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+// Exact vector path exported from Figma "shield-exclaim" icon node (11090:24).
+export function ShieldExclaimIcon({ className }: OthersIconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className={className}>
+      <path
+        d="M12 9V12.75M12 2.714C9.73573 4.86423 6.72026 6.04358 3.598 6C3.20073 7.2103 2.99887 8.47617 3 9.75C3 15.342 6.824 20.04 12 21.372C17.176 20.04 21 15.342 21 9.75C21 8.44 20.79 7.18 20.402 6H20.25C17.054 6 14.15 4.75 12 2.714ZM12 15.75H12.008V15.758H12V15.75Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export type OthersIconEntry = {
   name: string;
   Icon: (props: OthersIconProps) => React.JSX.Element;
@@ -147,6 +192,30 @@ export const OTHERS_ICONS: OthersIconEntry[] = [
     Icon: AiSolodIcon,
     svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
   <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 12C2.25 6.615 6.615 2.25 12 2.25C17.385 2.25 21.75 6.615 21.75 12C21.75 17.385 17.385 21.75 12 21.75C6.615 21.75 2.25 17.385 2.25 12ZM9 8.25C8.80109 8.25 8.61032 8.32902 8.46967 8.46967C8.32902 8.61032 8.25 8.80109 8.25 9V13C8.25 13.414 8.586 13.75 9 13.75H9.75C9.94891 13.75 10.1397 13.671 10.2803 13.5303C10.421 13.3897 10.5 13.1989 10.5 13V9C10.5 8.80109 10.421 8.61032 10.2803 8.46967C10.1397 8.32902 9.94891 8.25 9.75 8.25H9ZM14.25 8.25C14.0511 8.25 13.8603 8.32902 13.7197 8.46967C13.579 8.61032 13.5 8.80109 13.5 9V13C13.5 13.414 13.836 13.75 14.25 13.75H15C15.1989 13.75 15.3897 13.671 15.5303 13.5303C15.671 13.3897 15.75 13.1989 15.75 13V9C15.75 8.80109 15.671 8.61032 15.5303 8.46967C15.3897 8.32902 15.1989 8.25 15 8.25H14.25Z" fill="currentColor"/>
+</svg>
+`,
+  },
+  {
+    name: "disconnect",
+    Icon: DisconnectIcon,
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <path d="M16 3L21 8M2 12H22C22 13.9778 21.4135 15.9112 20.3147 17.5557C19.2159 19.2002 17.6541 20.4819 15.8268 21.2388C13.9996 21.9957 11.9889 22.1937 10.0491 21.8079C8.10929 21.422 6.32746 20.4696 4.92894 19.0711C3.53041 17.6725 2.578 15.8907 2.19215 13.9509C1.8063 12.0111 2.00433 10.0004 2.76121 8.17317C3.51809 6.3459 4.79981 4.78412 6.4443 3.6853C8.08879 2.58649 10.0222 2 12 2C9.43224 4.69615 8 8.27674 8 12C8 15.7233 9.43224 19.3038 12 22C14.5678 19.3038 16 15.7233 16 12M21 3L16 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`,
+  },
+  {
+    name: "connect",
+    Icon: ConnectIcon,
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <path d="M22 12C22 17.5228 17.5228 22 12 22M22 12C22 6.47715 17.5228 2 12 2M22 12H2M12 22C6.47715 22 2 17.5228 2 12M12 22C9.43223 19.3038 8 15.7233 8 12C8 8.27674 9.43223 4.69615 12 2M12 22C14.5678 19.3038 16 15.7233 16 12C16 8.27674 14.5678 4.69615 12 2M2 12C2 6.47715 6.47715 2 12 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`,
+  },
+  {
+    name: "shield-exclaim",
+    Icon: ShieldExclaimIcon,
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <path d="M12 9V12.75M12 2.714C9.73573 4.86423 6.72026 6.04358 3.598 6C3.20073 7.2103 2.99887 8.47617 3 9.75C3 15.342 6.824 20.04 12 21.372C17.176 20.04 21 15.342 21 9.75C21 8.44 20.79 7.18 20.402 6H20.25C17.054 6 14.15 4.75 12 2.714ZM12 15.75H12.008V15.758H12V15.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 `,
   },
