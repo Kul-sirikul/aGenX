@@ -3,12 +3,12 @@ import { USER_ICONS } from "icons";
 import { IconGallery } from "./IconGallery";
 
 const meta = {
-  title: "Icon/User",
+  title: "Foundation/Icon",
 } satisfies Meta;
 
 export default meta;
 
-export const Default: StoryObj = {
-  name: "All user",
+export const User: StoryObj = {
+  name: "User",
   render: () => <IconGallery items={USER_ICONS} />,
 };

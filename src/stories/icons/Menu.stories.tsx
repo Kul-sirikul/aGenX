@@ -3,7 +3,7 @@ import { MENU_ICONS, buildMenuSvgMarkup } from "icons";
 import { IconGallery } from "./IconGallery";
 
 const meta = {
-  title: "Icon/Menu",
+  title: "Foundation/Icon",
 } satisfies Meta;
 
 export default meta;
@@ -14,7 +14,7 @@ const items = MENU_ICONS.map((icon) => ({
   svg: buildMenuSvgMarkup(icon.path, icon.fill),
 }));
 
-export const Default: StoryObj = {
-  name: "All menu",
+export const Menu: StoryObj = {
+  name: "Menu",
   render: () => <IconGallery items={items} />,
 };

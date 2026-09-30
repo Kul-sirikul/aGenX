@@ -3,12 +3,12 @@ import { COMMUNICATION_ICONS } from "icons";
 import { IconGallery } from "./IconGallery";
 
 const meta = {
-  title: "Icon/Communication",
+  title: "Foundation/Icon",
 } satisfies Meta;
 
 export default meta;
 
-export const Default: StoryObj = {
-  name: "All Communication",
+export const Communication: StoryObj = {
+  name: "Communication",
   render: () => <IconGallery items={COMMUNICATION_ICONS} />,
 };

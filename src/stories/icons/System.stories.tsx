@@ -3,12 +3,12 @@ import { SYSTEM_ICONS } from "icons";
 import { IconGallery } from "./IconGallery";
 
 const meta = {
-  title: "Icon/System",
+  title: "Foundation/Icon",
 } satisfies Meta;
 
 export default meta;
 
-export const Default: StoryObj = {
-  name: "All system",
+export const System: StoryObj = {
+  name: "System",
   render: () => <IconGallery items={SYSTEM_ICONS} />,
 };

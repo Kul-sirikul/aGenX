@@ -3,12 +3,12 @@ import { TIME_ICONS } from "icons";
 import { IconGallery } from "./IconGallery";
 
 const meta = {
-  title: "Icon/Time",
+  title: "Foundation/Icon",
 } satisfies Meta;
 
 export default meta;
 
-export const Default: StoryObj = {
-  name: "All time",
+export const Time: StoryObj = {
+  name: "Time",
   render: () => <IconGallery items={TIME_ICONS} />,
 };

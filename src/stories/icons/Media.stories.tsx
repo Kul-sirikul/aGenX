@@ -3,12 +3,12 @@ import { MEDIA_ICONS } from "icons";
 import { IconGallery } from "./IconGallery";
 
 const meta = {
-  title: "Icon/Media",
+  title: "Foundation/Icon",
 } satisfies Meta;
 
 export default meta;
 
-export const Default: StoryObj = {
-  name: "All media",
+export const Media: StoryObj = {
+  name: "Media",
   render: () => <IconGallery items={MEDIA_ICONS} />,
 };

@@ -3,7 +3,7 @@ import { ARROW_ICONS, buildArrowSvgMarkup } from "icons";
 import { IconGallery } from "./IconGallery";
 
 const meta = {
-  title: "Icon/Arrow",
+  title: "Foundation/Icon",
 } satisfies Meta;
 
 export default meta;
@@ -14,7 +14,7 @@ const items = ARROW_ICONS.map((icon) => ({
   svg: buildArrowSvgMarkup(icon.path, icon.fill),
 }));
 
-export const Default: StoryObj = {
-  name: "All arrow",
+export const Arrow: StoryObj = {
+  name: "Arrow",
   render: () => <IconGallery items={items} />,
 };

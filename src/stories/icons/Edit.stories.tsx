@@ -3,12 +3,12 @@ import { EDIT_ICONS } from "icons";
 import { IconGallery } from "./IconGallery";
 
 const meta = {
-  title: "Icon/Edit",
+  title: "Foundation/Icon",
 } satisfies Meta;
 
 export default meta;
 
-export const Default: StoryObj = {
-  name: "All edit",
+export const Edit: StoryObj = {
+  name: "Edit",
   render: () => <IconGallery items={EDIT_ICONS} />,
 };
