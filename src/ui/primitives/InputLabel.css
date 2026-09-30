@@ -22,7 +22,6 @@
   display: flex;
   align-items: baseline;
   gap: var(--spacing-4);
-  flex: 1 0 0;
   min-width: 0;
   white-space: nowrap;
   color: var(--text-primary);

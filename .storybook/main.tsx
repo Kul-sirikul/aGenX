@@ -35,6 +35,22 @@ const config: StorybookConfig = {
       };
     }
 
+    // `@storybook/react`'s docs renderer is only imported lazily (when a
+    // Docs page actually renders), so Vite's initial dependency scan misses
+    // it. Discovering it mid-session forces a disruptive "optimized
+    // dependencies changed" full re-bundle that races with in-flight
+    // requests and briefly 404s already-loaded chunks ("Failed to fetch
+    // dynamically imported module"). Listing it here pre-bundles it at cold
+    // start instead.
+    config.optimizeDeps = {
+      ...config.optimizeDeps,
+      include: [
+        ...(config.optimizeDeps?.include ?? []),
+        "@storybook/react/dist/entry-preview-docs.mjs",
+        "@storybook/theming/create",
+      ],
+    };
+
     return config;
   },
 

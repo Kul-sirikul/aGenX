@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { Toggle } from "./Toggle";
+import { Tooltip } from "./Tooltip";
 import "./ToggleWithLabel.css";
 
 export type ToggleWithLabelType = "Default" | "BG";
@@ -43,9 +44,11 @@ export function ToggleWithLabel({
       <span className="agx-toggle-with-label__title">
         <span className="agx-toggle-with-label__text">{label}</span>
         {info ? (
-          <button type="button" className="agx-toggle-with-label__info-button" aria-label="More information">
-            <InfoIcon />
-          </button>
+          <Tooltip content="Test Playground">
+            <button type="button" className="agx-toggle-with-label__info-button" aria-label="More information">
+              <InfoIcon />
+            </button>
+          </Tooltip>
         ) : null}
       </span>
       <Toggle

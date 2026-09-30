@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { Input, type InputProps } from "./Input";
+import { Tooltip } from "./Tooltip";
 import "./InputLabel.css";
 
 export type InputLabelProps = InputProps & {
@@ -38,9 +39,11 @@ export function InputLabel({
           {optional && <span className="agx-input-label__optional">Optional</span>}
         </span>
         {infoIcon && (
-          <button type="button" className="agx-input-label__info-button" aria-label="More information">
-            <InfoIcon />
-          </button>
+          <Tooltip content="Test Playground">
+            <button type="button" className="agx-input-label__info-button" aria-label="More information">
+              <InfoIcon />
+            </button>
+          </Tooltip>
         )}
       </div>
       <Input size={size} {...inputProps} />

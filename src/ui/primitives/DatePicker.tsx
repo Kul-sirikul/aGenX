@@ -187,7 +187,7 @@ export function DatePicker({
               {helpText}
             </Text>
           )}
-          <Popover>
+          <Popover placement="bottom">
             <Dialog className="agx-calendar__dialog">
               {({ close }) => (
                 <Calendar

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
+import clsx from "clsx";
 import { ListBox, type Key } from "react-aria-components";
 import { Dropdown, DropdownItem, DropdownList, Tooltip, type DropdownVariant, type DropdownSize } from "primitives";
 
@@ -86,6 +87,80 @@ const infoTriggerStyle: React.CSSProperties = {
   cursor: "default",
 };
 
+// Exact vector path exported from Figma "check" icon node (49:2832) — same
+// glyph DropdownItem's own checkbox uses, reused here for the "All" row's
+// fully-checked state.
+function AllCheckIcon() {
+  return (
+    <svg viewBox="0 0 12 12" fill="none" aria-hidden="true" className="agx-dropdown-item__checkbox-check">
+      <path
+        d="M2.25 6.375L5.25 9.375L9.75 2.625"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+// Exact vector path exported from Figma "dash" icon node (49:2840) — shown
+// in the "All" checkbox when some (but not all) items are selected.
+function AllDashIcon() {
+  return (
+    <svg viewBox="0 0 12 12" fill="none" aria-hidden="true" className="agx-dropdown-item__checkbox-check">
+      <path d="M2.5 6L9.5 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+// A "select all" row for the multi-select Checkbox demo, matching Figma node
+// 12533:50499 ("All" list item). Toggling everything on/off isn't a single
+// selectable value, so it isn't a real ListBox option — it's a plain row
+// reusing DropdownItem's own checkbox classes for a matching look, rendered
+// above the real items via Dropdown's `beforeList` slot.
+function SelectAllRow({
+  items,
+  selectedKeys,
+  onChange,
+}: {
+  items: { id: Key }[];
+  selectedKeys: Key[];
+  onChange: (keys: Key[]) => void;
+}) {
+  const allSelected = items.length > 0 && selectedKeys.length === items.length;
+  const someSelected = selectedKeys.length > 0 && !allSelected;
+
+  function toggleAll() {
+    onChange(allSelected ? [] : items.map((item) => item.id));
+  }
+
+  return (
+    <div
+      role="checkbox"
+      aria-checked={someSelected ? "mixed" : allSelected}
+      aria-label="All"
+      tabIndex={0}
+      className="agx-dropdown-item"
+      onClick={toggleAll}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          toggleAll();
+        }
+      }}
+    >
+      <span
+        className={clsx("agx-dropdown-item__checkbox", (allSelected || someSelected) && "agx-dropdown-item__checkbox--checked")}
+      >
+        {allSelected && <AllCheckIcon />}
+        {someSelected && <AllDashIcon />}
+      </span>
+      <span className="agx-dropdown-item__label">All</span>
+    </div>
+  );
+}
+
 type PlaygroundArgs = {
   showLabel: boolean;
   label: string;
@@ -95,7 +170,8 @@ type PlaygroundArgs = {
   showLeftIcon: boolean;
   variant: DropdownVariant;
   size: DropdownSize;
-  badge: boolean;
+  checkbox: boolean;
+  itemIcon: boolean;
   x: boolean;
   isDisabled: boolean;
   isInvalid: boolean;
@@ -105,30 +181,67 @@ type PlaygroundArgs = {
 };
 
 function DropdownPlaygroundDemo(args: PlaygroundArgs) {
-  const [selectedKey, setSelectedKey] = useState<Key | null>(null);
+  const [selectedKeys, setSelectedKeys] = useState<Key[]>([]);
+
+  const label = args.showLabel && (
+    <div style={labelRowStyle}>
+      <div style={labelTextRowStyle}>
+        <p style={getLabelStyle(args.size)}>{args.label}</p>
+        {args.optional && <p style={optionalStyle}>Optional</p>}
+      </div>
+      {args.showInfoIcon && (
+        <Tooltip content="Test Playground">
+          <span role="button" tabIndex={0} aria-label="More information" style={infoTriggerStyle}>
+            <InfoIcon />
+          </span>
+        </Tooltip>
+      )}
+    </div>
+  );
+
+  // Multi-select with per-item checkboxes and a "select all" row, matching
+  // Figma node 12533:50497 — a different selection model (`value`/`onChange`
+  // over an array of keys) than the single-select branch below, so it's a
+  // separate Dropdown instance rather than one with dynamic prop shapes.
+  if (args.checkbox) {
+    return (
+      <div style={fieldStyle}>
+        {label}
+        <Dropdown
+          selectionMode="multiple"
+          variant={args.variant}
+          size={args.size}
+          leftIcon={args.showLeftIcon}
+          x={args.x}
+          isDisabled={args.isDisabled}
+          isInvalid={args.isInvalid}
+          errorMessage={args.errorMessage}
+          placeholder={args.placeholder}
+          headling={args.headling}
+          search={args.search}
+          items={PLAYGROUND_ITEMS}
+          value={selectedKeys}
+          onChange={setSelectedKeys}
+          beforeList={<SelectAllRow items={PLAYGROUND_ITEMS} selectedKeys={selectedKeys} onChange={setSelectedKeys} />}
+          dependencies={[args.itemIcon]}
+        >
+          {(item) => (
+            <DropdownItem id={item.id} checkbox leftIcon={args.itemIcon}>
+              {item.label}
+            </DropdownItem>
+          )}
+        </Dropdown>
+      </div>
+    );
+  }
 
   return (
     <div style={fieldStyle}>
-      {args.showLabel && (
-        <div style={labelRowStyle}>
-          <div style={labelTextRowStyle}>
-            <p style={getLabelStyle(args.size)}>{args.label}</p>
-            {args.optional && <p style={optionalStyle}>Optional</p>}
-          </div>
-          {args.showInfoIcon && (
-            <Tooltip content="Test Playground">
-              <span role="button" tabIndex={0} aria-label="More information" style={infoTriggerStyle}>
-                <InfoIcon />
-              </span>
-            </Tooltip>
-          )}
-        </div>
-      )}
+      {label}
       <Dropdown
         variant={args.variant}
         size={args.size}
         leftIcon={args.showLeftIcon}
-        badge={args.badge}
         x={args.x}
         isDisabled={args.isDisabled}
         isInvalid={args.isInvalid}
@@ -137,10 +250,15 @@ function DropdownPlaygroundDemo(args: PlaygroundArgs) {
         headling={args.headling}
         search={args.search}
         items={PLAYGROUND_ITEMS}
-        selectedKey={selectedKey}
-        onSelectionChange={setSelectedKey}
+        selectedKey={selectedKeys[0] ?? null}
+        onSelectionChange={(key) => setSelectedKeys(key == null ? [] : [key])}
+        dependencies={[args.itemIcon]}
       >
-        {(item) => <DropdownItem id={item.id}>{item.label}</DropdownItem>}
+        {(item) => (
+          <DropdownItem id={item.id} leftIcon={args.itemIcon}>
+            {item.label}
+          </DropdownItem>
+        )}
       </Dropdown>
     </div>
   );
@@ -167,7 +285,8 @@ export const Default: StoryObj<{ args: PlaygroundArgs }> = {
     showLeftIcon: false,
     variant: "Default",
     size: "M",
-    badge: false,
+    checkbox: false,
+    itemIcon: true,
     x: true,
     isDisabled: false,
     isInvalid: false,
@@ -209,7 +328,12 @@ export const Default: StoryObj<{ args: PlaygroundArgs }> = {
       control: "inline-radio",
       options: ["S", "M"] satisfies DropdownSize[],
     },
-    badge: {
+    checkbox: {
+      name: "Checkbox",
+      control: "boolean",
+    },
+    itemIcon: {
+      name: "Show item icon",
       control: "boolean",
     },
     x: {

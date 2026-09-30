@@ -14,8 +14,12 @@ import "./Dropdown.css";
 
 export type DropdownVariant = "Default" | "Ghost";
 export type DropdownSize = "S" | "M";
+export type DropdownSelectionMode = "single" | "multiple";
 
-export type DropdownProps<T extends object> = Omit<SelectProps<T>, "children" | "className"> & {
+export type DropdownProps<T extends object, M extends DropdownSelectionMode = "single"> = Omit<
+  SelectProps<T, M>,
+  "children" | "className"
+> & {
   variant?: DropdownVariant;
   size?: DropdownSize;
   leftIcon?: boolean;
@@ -29,8 +33,22 @@ export type DropdownProps<T extends object> = Omit<SelectProps<T>, "children" | 
   headingText?: string;
   /** Shows a search field above the list in the popover. Forwarded to `DropdownList`. */
   search?: boolean;
+  /**
+   * Extra content rendered above the item list, inside the popover — e.g. a
+   * "select all" row for a multi-select (`selectionMode="multiple"`)
+   * Dropdown, matching Figma node 12533:50497. Not a real selectable option
+   * itself, so it isn't part of `items`/`children`.
+   */
+  beforeList?: React.ReactNode;
   items: Iterable<T>;
   children: (item: T) => React.ReactElement;
+  /**
+   * Values the item list should re-render on. `ListBox` caches each item's
+   * rendered output by key and won't notice a change to state the
+   * `children` render function closes over (e.g. a prop toggled elsewhere)
+   * unless that value is listed here.
+   */
+  dependencies?: ReadonlyArray<unknown>;
   className?: string;
 };
 
@@ -116,7 +134,7 @@ function DropdownClearButton({ size }: { size: DropdownSize }) {
   );
 }
 
-export function Dropdown<T extends object>({
+export function Dropdown<T extends object, M extends DropdownSelectionMode = "single">({
   variant = "Default",
   size = "M",
   leftIcon = false,
@@ -128,11 +146,13 @@ export function Dropdown<T extends object>({
   headling = false,
   headingText,
   search = false,
+  beforeList,
   items,
   children,
+  dependencies,
   className,
   ...props
-}: DropdownProps<T>) {
+}: DropdownProps<T, M>) {
   return (
     <Select
       {...props}
@@ -146,7 +166,12 @@ export function Dropdown<T extends object>({
             <SelectValue
               className={({ isPlaceholder }) => clsx("agx-dropdown__value", isPlaceholder && "agx-dropdown__value--placeholder")}
             >
-              {({ isPlaceholder, selectedText }) => (isPlaceholder ? placeholder : selectedText)}
+              {({ isPlaceholder, state }) =>
+                // A plain ", "-joined list rather than `selectedText` (which
+                // formats multi-select as "A and B" via Intl.ListFormat) —
+                // Figma's multi-select Dropdown shows "Option 1, Option 2".
+                isPlaceholder ? placeholder : state.selectedItems.map((item) => item.textValue).join(", ")
+              }
             </SelectValue>
             {badge && (
               <span className="agx-dropdown__badge">
@@ -160,7 +185,8 @@ export function Dropdown<T extends object>({
           {isInvalid && errorMessage && <p className="agx-dropdown__help">{errorMessage}</p>}
           <Popover className="agx-dropdown__popover" placement="bottom" shouldFlip={false}>
             <DropdownList headling={headling} headingText={headingText} search={search}>
-              <ListBox items={items} className="agx-dropdown__listbox">
+              {beforeList}
+              <ListBox items={items} dependencies={dependencies} className="agx-dropdown__listbox">
                 {children}
               </ListBox>
             </DropdownList>
