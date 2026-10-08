@@ -68,6 +68,10 @@ const meta = {
     disabled: {
       control: "boolean",
     },
+    view: {
+      name: "View",
+      control: "boolean",
+    },
   } as Record<string, unknown>,
   args: {
     // Key order here (not argTypes declaration order) sets the Controls
@@ -88,6 +92,7 @@ const meta = {
     button: true,
     isInvalid: false,
     disabled: false,
+    view: false,
   } as Record<string, unknown>,
 } satisfies Meta<typeof Input>;
 
@@ -105,6 +110,7 @@ type InputStoryArgs = {
   button: boolean;
   isInvalid: boolean;
   disabled: boolean;
+  view: boolean;
   placeholder: string;
   label: string;
   showLabel: boolean;
@@ -126,6 +132,7 @@ type InputWithBadgeArgs = {
   iconButton: boolean;
   isInvalid: boolean;
   disabled: boolean;
+  view: boolean;
   placeholder: string;
 };
 
@@ -136,6 +143,7 @@ export const WithBadge: StoryObj<{ args: InputWithBadgeArgs }> = {
     iconButton: true,
     isInvalid: false,
     disabled: false,
+    view: false,
   },
   argTypes: {
     counter: {
@@ -151,6 +159,10 @@ export const WithBadge: StoryObj<{ args: InputWithBadgeArgs }> = {
       control: "boolean",
     },
     disabled: {
+      control: "boolean",
+    },
+    view: {
+      name: "View",
       control: "boolean",
     },
     // Hide Input's controls, inherited from `meta` — this story renders
@@ -172,7 +184,7 @@ export const WithBadge: StoryObj<{ args: InputWithBadgeArgs }> = {
     // Pass only InputWithBadge's own props — `args` also carries Input's
     // args inherited from `meta`, which would otherwise leak onto the
     // underlying <textarea> as invalid DOM attributes.
-    const { label, counter, iconButton, isInvalid, disabled, placeholder } = args as InputWithBadgeArgs;
+    const { label, counter, iconButton, isInvalid, disabled, view, placeholder } = args as InputWithBadgeArgs;
     return (
       <InputWithBadge
         label={label}
@@ -180,6 +192,7 @@ export const WithBadge: StoryObj<{ args: InputWithBadgeArgs }> = {
         iconButton={iconButton}
         isInvalid={isInvalid}
         disabled={disabled}
+        view={view}
         placeholder={placeholder}
       />
     );

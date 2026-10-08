@@ -23,6 +23,8 @@ figma.connect(Input, "https://www.figma.com/design/Pxm4oPgp8MxkUkh5NioGtJ/-aGenX
       "Filled+hover": false,
       Error: true,
       Disable: false,
+      "View+default": false,
+      "View+filled": false,
     }),
     disabled: figma.enum("state", {
       Default: false,
@@ -32,9 +34,22 @@ figma.connect(Input, "https://www.figma.com/design/Pxm4oPgp8MxkUkh5NioGtJ/-aGenX
       "Filled+hover": false,
       Error: false,
       Disable: true,
+      "View+default": false,
+      "View+filled": false,
+    }),
+    view: figma.enum("state", {
+      Default: false,
+      Focus: false,
+      Typing: false,
+      Filled: false,
+      "Filled+hover": false,
+      Error: false,
+      Disable: false,
+      "View+default": true,
+      "View+filled": true,
     }),
   },
-  example: ({ size, leftIcon, rightIcon, arrow, unit, helpText, text, count, button, isInvalid, disabled }) => (
+  example: ({ size, leftIcon, rightIcon, arrow, unit, helpText, text, count, button, isInvalid, disabled, view }) => (
     <Input
       size={size}
       leftIcon={leftIcon}
@@ -47,6 +62,7 @@ figma.connect(Input, "https://www.figma.com/design/Pxm4oPgp8MxkUkh5NioGtJ/-aGenX
       button={button}
       isInvalid={isInvalid}
       disabled={disabled}
+      view={view}
     />
   ),
 });

@@ -34,6 +34,19 @@
   border-color: var(--border-error);
 }
 
+.agx-input-badge--view .agx-input-badge__field {
+  border: none;
+  background: var(--surface-gray-super-light);
+}
+
+.agx-input-badge--view .agx-input-badge__control {
+  cursor: default;
+}
+
+.agx-input-badge--view .agx-input-badge__counter {
+  font-size: var(--size-10);
+}
+
 .agx-input-badge__header {
   display: flex;
   align-items: center;

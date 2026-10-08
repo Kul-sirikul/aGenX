@@ -12,6 +12,7 @@ export type InputWithBadgeProps = Omit<React.TextareaHTMLAttributes<HTMLTextArea
   iconButton?: boolean;
   label?: string;
   isInvalid?: boolean;
+  view?: boolean;
 };
 
 // Exact vector path exported from Figma "filter" icon node (I11424:19403;752:26939).
@@ -34,6 +35,7 @@ export function InputWithBadge({
   iconButton = true,
   label = "Label",
   isInvalid = false,
+  view = false,
   placeholder = "Placeholder Text",
   className,
   rows = 1,
@@ -52,7 +54,7 @@ export function InputWithBadge({
   }, []);
 
   return (
-    <div className={clsx("agx-input-badge", isInvalid && "agx-input-badge--invalid", className)}>
+    <div className={clsx("agx-input-badge", isInvalid && "agx-input-badge--invalid", view && "agx-input-badge--view", className)}>
       <div className="agx-input-badge__field">
         <div className="agx-input-badge__header">
           <span className="agx-input-badge__badge">{label}</span>
@@ -70,6 +72,7 @@ export function InputWithBadge({
           value={value}
           defaultValue={defaultValue}
           className="agx-input-badge__control"
+          readOnly={view}
           onChange={(event) => {
             resizeToFitContent(event.currentTarget);
             setUncontrolledLength(event.currentTarget.value.length);

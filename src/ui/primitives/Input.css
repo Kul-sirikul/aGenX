@@ -36,6 +36,16 @@
   border-color: var(--border-error);
 }
 
+.agx-input--view .agx-input__field {
+  border: none;
+  background: var(--surface-gray-super-light);
+  box-shadow: none;
+}
+
+.agx-input--view .agx-input__control {
+  cursor: default;
+}
+
 .agx-input--m .agx-input__field {
   padding: var(--spacing-8) var(--spacing-12);
 }

@@ -15,6 +15,7 @@ export type InputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, "size
   count?: boolean;
   button?: boolean;
   isInvalid?: boolean;
+  view?: boolean;
 };
 
 // Exact vector path exported from Figma "search" icon node (45:2175); reused
@@ -61,6 +62,7 @@ export function Input({
   count = false,
   button = true,
   isInvalid = false,
+  view = false,
   placeholder = "Placeholder Text",
   className,
   ...props
@@ -77,14 +79,14 @@ export function Input({
   }
 
   return (
-    <div className={clsx("agx-input", `agx-input--${size.toLowerCase()}`, isInvalid && "agx-input--invalid", className)}>
+    <div className={clsx("agx-input", `agx-input--${size.toLowerCase()}`, isInvalid && "agx-input--invalid", view && "agx-input--view", className)}>
       <div className="agx-input__field">
         {leftIcon && (
           <span className="agx-input__icon-slot">
             <SearchIcon />
           </span>
         )}
-        <input ref={inputRef} type="text" placeholder={placeholder} className="agx-input__control" {...props} />
+        <input ref={inputRef} type="text" placeholder={placeholder} className="agx-input__control" readOnly={view} {...props} />
         {rightIcon && (
           <span className="agx-input__icon-slot">
             <SearchIcon />
@@ -92,16 +94,18 @@ export function Input({
         )}
         {unit && <span className="agx-input__unit">Unit</span>}
         {arrow && <ArrowDownIcon />}
-        <button
-          type="button"
-          className="agx-input__clear"
-          aria-label="Clear input"
-          tabIndex={-1}
-          onMouseDown={(event) => event.preventDefault()}
-          onClick={handleClear}
-        >
-          <ClearIcon />
-        </button>
+        {!view && (
+          <button
+            type="button"
+            className="agx-input__clear"
+            aria-label="Clear input"
+            tabIndex={-1}
+            onMouseDown={(event) => event.preventDefault()}
+            onClick={handleClear}
+          >
+            <ClearIcon />
+          </button>
+        )}
       </div>
       {helpText && (
         <div className="agx-input__help-row">
